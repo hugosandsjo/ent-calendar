@@ -7,7 +7,7 @@ import RadioButton from "@/src/app/components/form/RadioButton";
 import { addEntry } from "@/src/app/actions/actions";
 import FormInput from "@/src/app/components/form/FormInput";
 import FormInputLarge from "@/src/app/components/form/FormInputLarge";
-import FormMonth from "@/src/app/components/form/FormMonth";
+// import FormMonth from "@/src/app/components/form/FormMonth";
 import FormStar from "@/src/app/components/form/FormStar";
 
 export default function EntryForm() {
