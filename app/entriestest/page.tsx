@@ -3,8 +3,6 @@
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
 
-export const dynamic = "force-dynamic";
-
 export default function Page() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [notes, setNotes] = useState<any[] | null>(null);
@@ -16,7 +14,7 @@ export default function Page() {
       setNotes(data);
     };
     getData();
-  }, []);
+  }, [supabase]);
 
   return <pre>{JSON.stringify(notes, null, 2)}</pre>;
 }
