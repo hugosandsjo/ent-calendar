@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import { UserProvider } from "@auth0/nextjs-auth0/client";
 import "./globals.css";
 import Header from "@/src/app/components/ui/Header";
 import Footer from "@/src/app/components/ui/Footer";
@@ -29,11 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.className} antialiased`}>
-        <UserProvider>
-          <Header />
-          {children}
-          <Footer />
-        </UserProvider>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );
