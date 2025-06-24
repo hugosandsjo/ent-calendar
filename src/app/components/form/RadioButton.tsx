@@ -1,4 +1,4 @@
-import "../../styles/radioButton.css";
+import "../../styles/RadioButton.css";
 
 type RadioButtonProps = {
   category: string;
@@ -9,7 +9,7 @@ type RadioButtonProps = {
 function RadioButton({ category, onChange, checked }: RadioButtonProps) {
   return (
     <>
-      <label className="text-1xl rounded cursor-pointer " htmlFor={category}>
+      <label className="text-1xl rounded cursor-pointer" htmlFor={category}>
         <input
           type="radio"
           id={category}
