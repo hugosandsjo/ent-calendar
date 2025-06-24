@@ -2,7 +2,6 @@
 
 // import { sql } from "@vercel/postgres";
 import { redirect } from "next/navigation";
-import { EntryData } from "@/src/app/components/ui/Entry";
 
 export const addEntry = async (formData: FormData) => {
   const user_sub = formData.get("user_sub") as string | null;
@@ -116,34 +115,30 @@ export const getUpdateEntry = async (id: number) => {
 };
 
 export const updateEntry = async (id: number, formData: FormData) => {
-  const title = formData.get("title") as string | null;
-  const category = formData.get("category") as string | null;
-  const genre = formData.get("genre") as string | null;
-  const year = formData.get("year") as number | null;
-  const description = formData.get("description") as string | null;
-  const month = formData.get("month") as string | null;
-  const rating = formData.get("rating") as number | null;
-
-  let author = null;
-  let director = null;
-  let writer = null;
-  let publisher = null;
-  let developer = null;
-
-  if (category === "Book") {
-    author = formData.get("author") as string | null;
-  } else if (category === "Movie" || category === "Series") {
-    director = formData.get("director") as string | null;
-    writer = formData.get("writer") as string | null;
-  } else if (category === "Game") {
-    publisher = formData.get("publisher") as string | null;
-    developer = formData.get("developer") as string | null;
-  }
-
-  if (!title || !category || !genre || !year || !description || !month) {
-    throw new Error("Missing required form data");
-  }
-
+  // const title = formData.get("title") as string | null;
+  // const category = formData.get("category") as string | null;
+  // const genre = formData.get("genre") as string | null;
+  // const year = formData.get("year") as number | null;
+  // const description = formData.get("description") as string | null;
+  // const month = formData.get("month") as string | null;
+  // const rating = formData.get("rating") as number | null;
+  // let author = null;
+  // let director = null;
+  // let writer = null;
+  // let publisher = null;
+  // let developer = null;
+  // if (category === "Book") {
+  //   author = formData.get("author") as string | null;
+  // } else if (category === "Movie" || category === "Series") {
+  //   director = formData.get("director") as string | null;
+  //   writer = formData.get("writer") as string | null;
+  // } else if (category === "Game") {
+  //   publisher = formData.get("publisher") as string | null;
+  //   developer = formData.get("developer") as string | null;
+  // }
+  // if (!title || !category || !genre || !year || !description || !month) {
+  //   throw new Error("Missing required form data");
+  // }
   //   await sql`
   //   UPDATE entries
   //   SET
@@ -161,7 +156,6 @@ export const updateEntry = async (id: number, formData: FormData) => {
   //     rating = ${rating}
   //   WHERE id = ${id}
   // `;
-
   //   redirect("/dashboard");
 };
 

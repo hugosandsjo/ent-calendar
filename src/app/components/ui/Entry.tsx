@@ -1,6 +1,6 @@
 import React from "react";
 import InfoTag from "@/src/app/components/ui/InfoTag";
-import { deleteEntry } from "@/src/app/actions/actionts";
+import { deleteEntry } from "@/src/app/actions/actions";
 import GenreTag from "@/src/app/components/ui/GenreTag";
 import Link from "next/link";
 import RatingTag from "@/src/app/components/form/RatingTag";
@@ -40,7 +40,6 @@ function Entry({
   genre,
   year,
   description,
-  month,
   author,
   director,
   writer,
@@ -48,7 +47,6 @@ function Entry({
   developer,
   rating,
   onDelete,
-  onUpdate,
 }: EntryProps) {
   return (
     <div className="min-w-96 max-w-lg py-9 px-12 flex flex-col gap-4 justify-between border border-black">
