@@ -1,20 +1,22 @@
-"use client";
+// "use client";
 
-import { createClient } from "@/lib/supabase/client";
-import { useEffect, useState } from "react";
+// import { createClient } from "@/lib/supabase/client";
+// import { useEffect, useState } from "react";
 
-export default function Page() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [notes, setNotes] = useState<any[] | null>(null);
-  const supabase = createClient();
+// export const dynamic = "force-dynamic";
 
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await supabase.from("entries").select();
-      setNotes(data);
-    };
-    getData();
-  }, []);
+// export default function Page() {
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   const [notes, setNotes] = useState<any[] | null>(null);
+//   const supabase = createClient();
 
-  return <pre>{JSON.stringify(notes, null, 2)}</pre>;
-}
+//   useEffect(() => {
+//     const getData = async () => {
+//       const { data } = await supabase.from("entries").select();
+//       setNotes(data);
+//     };
+//     getData();
+//   }, []);
+
+//   return <pre>{JSON.stringify(notes, null, 2)}</pre>;
+// }
