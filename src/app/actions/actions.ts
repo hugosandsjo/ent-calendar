@@ -89,12 +89,15 @@ export const getEntries = async (userSub: string | null | undefined) => {
 };
 
 export const getEntry = async (id: number) => {
+  console.log("getEntry", id);
   //   const result = await sql`SELECT * FROM entries WHERE id = ${id}`;
   //   const entries = result.rows;
   //   return entries[0];
 };
 
 export const getUpdateEntry = async (id: number) => {
+  let entry = id;
+  console.log("getUpdateEntry", entry);
   //   const result = await sql`SELECT * FROM entries WHERE id = ${id}`;
   //   const entry = result.rows[0];
   //   console.log("getUpdateEntry", entry);
@@ -115,6 +118,8 @@ export const getUpdateEntry = async (id: number) => {
 };
 
 export const updateEntry = async (id: number, formData: FormData) => {
+  console.log("updateEntry", id);
+  console.log("Form data:", Object.fromEntries(formData.entries()));
   // const title = formData.get("title") as string | null;
   // const category = formData.get("category") as string | null;
   // const genre = formData.get("genre") as string | null;
@@ -160,5 +165,6 @@ export const updateEntry = async (id: number, formData: FormData) => {
 };
 
 export const deleteEntry = async (id: number) => {
+  console.log("deleteEntry", id);
   //   await sql`DELETE FROM entries WHERE id = ${id}`;
 };
