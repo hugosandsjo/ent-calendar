@@ -96,7 +96,7 @@ export const getEntry = async (id: number) => {
 };
 
 export const getUpdateEntry = async (id: number) => {
-  let entry = id;
+  const entry = id;
   console.log("getUpdateEntry", entry);
   //   const result = await sql`SELECT * FROM entries WHERE id = ${id}`;
   //   const entry = result.rows[0];
