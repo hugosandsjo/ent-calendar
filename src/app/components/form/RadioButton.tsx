@@ -1,4 +1,4 @@
-import "../RadioButton.css";
+import "../../styles/radioButton.css";
 
 type RadioButtonProps = {
   category: string;
