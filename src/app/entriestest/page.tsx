@@ -1,25 +1,29 @@
-"use client";
+import "dotenv/config";
+import { db } from "@/src/db";
+import { entries } from "@/src/db/schema";
 
-import { getUserById } from "@/src/app/actions/actions";
-import { useEffect, useState } from "react";
+export default async function Page() {
+  // await db.delete(entries);
+  // const entry = await db
+  //   .insert(entries)
+  //   .values({
+  //     title: "Test Entry",
+  //     category: "Test Category",
+  //     genre: "Test Genre",
+  //     year: 2023,
+  //     createdAt: new Date(),
+  //     updatedAt: new Date(),
+  //     description: "This is a test entry.",
+  //     month: 10,
+  //     rating: 5,
+  //   })
+  //   .returning({ id: entries.id });
+  // console.log("Inserted entry:", entry);
+  const selectedEntries = await db
+    .select({ id: entries.id })
+    .from(entries)
+    .limit(10);
+  console.log("Selected entries:", selectedEntries);
 
-export default function Page() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [users, setUsers] = useState<any[] | null>(null);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const user = await getUserById(2); // Add await here
-        console.log("Fetched user:", user);
-        setUsers(user); // Set the fetched user data to state
-      } catch (error) {
-        console.error("Error fetching user:", error);
-      }
-    };
-
-    fetchUser();
-  }, []);
-
-  return <pre>{JSON.stringify(users, null, 2)}</pre>;
+  return <div></div>;
 }
