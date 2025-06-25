@@ -10,7 +10,7 @@ export default function Page() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const user = await getUserById(1); // Add await here
+        const user = await getUserById(2); // Add await here
         console.log("Fetched user:", user);
         setUsers(user); // Set the fetched user data to state
       } catch (error) {
