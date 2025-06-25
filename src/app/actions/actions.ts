@@ -1,20 +1,6 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { db } from "@/src/db";
-import { eq } from "drizzle-orm";
-import { SelectUser, usersTable } from "@/src/db/schema";
-
-export async function getUserById(id: SelectUser["id"]): Promise<
-  Array<{
-    id: number;
-    name: string;
-    age: number;
-    email: string;
-  }>
-> {
-  return db.select().from(usersTable).where(eq(usersTable.id, id));
-}
 
 export const addEntry = async (formData: FormData) => {
   const user_sub = formData.get("user_sub") as string | null;
