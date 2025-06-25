@@ -1,4 +1,5 @@
 import { createClient } from "@/src/lib/supabase/server";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function Dashboard() {
@@ -16,9 +17,9 @@ export default async function Dashboard() {
     <div>
       <h1>Dashboard</h1>
       <p>Welcome to your dashboard, {user.email}!</p>
-      <a href="/">
+      <Link href="/">
         <button>Back to Home</button>
-      </a>
+      </Link>
     </div>
   );
 }
