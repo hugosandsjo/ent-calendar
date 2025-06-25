@@ -7,10 +7,18 @@ export const entries = pgTable("entries", {
   genre: text("genre").notNull(),
   year: integer("year").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull(),
+  updatedAt: timestamp("updated_at")
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date()),
   description: text("description").notNull(),
-  month: integer("month").notNull(),
-  rating: integer("rating").notNull(),
+  month: text("month").notNull(),
+  rating: integer("rating"),
+  author: text("author"),
+  director: text("director"),
+  writer: text("writer"),
+  publisher: text("publisher"),
+  developer: text("developer"),
 });
 
 export type InsertEntry = typeof entries.$inferInsert;

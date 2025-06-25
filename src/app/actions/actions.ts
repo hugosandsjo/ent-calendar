@@ -1,9 +1,10 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { db } from "@/src/db";
+import { entries } from "@/src/db/schema";
 
 export const addEntry = async (formData: FormData) => {
-  const user_sub = formData.get("user_sub") as string | null;
   const title = formData.get("title") as string | null;
   const category = formData.get("category") as string | null;
   const genre = formData.get("genre") as string | null;
@@ -28,8 +29,11 @@ export const addEntry = async (formData: FormData) => {
     developer = formData.get("developer") as string | null;
   }
 
-  console.log("Submitted form data:", {
-    user_sub,
+  if (!title || !category || !genre || !year || !description || !month) {
+    throw new Error("Missing required form data");
+  }
+
+  await db.insert(entries).values({
     title,
     category,
     genre,
@@ -44,27 +48,6 @@ export const addEntry = async (formData: FormData) => {
     rating,
   });
 
-  if (
-    !user_sub ||
-    !title ||
-    !category ||
-    !genre ||
-    !year ||
-    !description ||
-    !month
-  ) {
-    throw new Error("Missing required form data");
-  }
-
-  //   await sql`
-  //     INSERT INTO entries (
-  //       user_sub, title, category, genre, year, description, month,
-  //       author, director, writer, publisher, developer, rating
-  //     ) VALUES (
-  //       ${user_sub}, ${title}, ${category}, ${genre}, ${year}, ${description}, ${month},
-  //       ${author}, ${director}, ${writer}, ${publisher}, ${developer}, ${rating}
-  //     )
-  //   `;
   redirect("/dashboard");
 };
 
