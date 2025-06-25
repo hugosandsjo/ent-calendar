@@ -44,7 +44,7 @@ export async function updateSession(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
+  console.log("User in middleware:", user);
   if (
     request.nextUrl.pathname !== "/" &&
     !user &&
