@@ -5,13 +5,26 @@ import { db } from "@/src/db";
 import { entries } from "@/src/db/schema";
 
 export const addEntry = async (formData: FormData) => {
-  const title = formData.get("title") as string | null;
-  const category = formData.get("category") as string | null;
-  const genre = formData.get("genre") as string | null;
-  const year = formData.get("year") as number | null;
-  const description = formData.get("description") as string | null;
-  const month = formData.get("month") as string | null;
-  const rating = formData.get("rating") as number | null;
+  const title = formData.get("title")?.toString() || null;
+  const category = formData.get("category")?.toString() || null;
+  const genre = formData.get("genre")?.toString() || null;
+  const yearStr = formData.get("year")?.toString();
+  const year = yearStr ? parseInt(yearStr, 10) : null;
+  const description = formData.get("description")?.toString() || null;
+  const month = formData.get("month")?.toString() || null;
+  const ratingStr = formData.get("rating")?.toString();
+  const rating = ratingStr ? parseInt(ratingStr, 10) : null;
+
+  console.log("Form data debug:", {
+    title,
+    category,
+    genre,
+    year,
+    description,
+    month,
+    rating,
+    formDataEntries: Object.fromEntries(formData.entries()),
+  });
 
   let author = null;
   let director = null;
@@ -20,16 +33,16 @@ export const addEntry = async (formData: FormData) => {
   let developer = null;
 
   if (category === "Book") {
-    author = formData.get("author") as string | null;
+    author = formData.get("author")?.toString() || null;
   } else if (category === "Movie" || category === "Series") {
-    director = formData.get("director") as string | null;
-    writer = formData.get("writer") as string | null;
+    director = formData.get("director")?.toString() || null;
+    writer = formData.get("writer")?.toString() || null;
   } else if (category === "Game") {
-    publisher = formData.get("publisher") as string | null;
-    developer = formData.get("developer") as string | null;
+    publisher = formData.get("publisher")?.toString() || null;
+    developer = formData.get("developer")?.toString() || null;
   }
 
-  if (!title || !category || !genre || !year || !description || !month) {
+  if (!title || !category || !genre || !year || !description) {
     throw new Error("Missing required form data");
   }
 

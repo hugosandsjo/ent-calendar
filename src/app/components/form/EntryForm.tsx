@@ -63,7 +63,7 @@ export default function EntryForm() {
               />
             ))}
           </div>
-          <input type="hidden" id="user_sub" name="user_sub" required></input>
+          {/* <input type="hidden" id="user_sub" name="user_sub" required></input> */}
           <FormInput title="Title" name="title" />
           <FormInput title="Genre" name="genre" />
           <FormInput title="Year" name="year" />
