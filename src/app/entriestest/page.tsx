@@ -1,22 +1,25 @@
 "use client";
 
-import { createClient } from "@/src/lib/supabase/client";
+import { getUserById } from "@/src/app/actions/actions";
 import { useEffect, useState } from "react";
-
-// export const dynamic = "force-dynamic"; // This page should always be dynamic
 
 export default function Page() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [notes, setNotes] = useState<any[] | null>(null);
-  const supabase = createClient();
+  const [users, setUsers] = useState<any[] | null>(null);
 
   useEffect(() => {
-    const getData = async () => {
-      const { data } = await supabase.from("entries").select();
-      setNotes(data);
+    const fetchUser = async () => {
+      try {
+        const user = await getUserById(1); // Add await here
+        console.log("Fetched user:", user);
+        setUsers(user); // Set the fetched user data to state
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
     };
-    getData();
-  }, [supabase]);
 
-  return <pre>{JSON.stringify(notes, null, 2)}</pre>;
+    fetchUser();
+  }, []);
+
+  return <pre>{JSON.stringify(users, null, 2)}</pre>;
 }
