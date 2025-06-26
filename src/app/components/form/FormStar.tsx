@@ -7,7 +7,6 @@ export default function FormStar() {
 
   return (
     <>
-      {" "}
       <h1>Rating</h1>
       <div className="flex">
         {[...Array(5)].map((_, index) => {

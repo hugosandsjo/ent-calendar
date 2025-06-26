@@ -6,7 +6,7 @@ import RadioButton from "@/src/app/components/form/RadioButton";
 import FormInput from "@/src/app/components/form/FormInput";
 import FormInputLarge from "@/src/app/components/form/FormInputLarge";
 import FormMonth from "@/src/app/components/form/FormMonth";
-import { InsertEntry, SelectEntry } from "@/src/db/schema";
+import { SelectEntry } from "@/src/db/schema";
 import FormStar from "@/src/app/components/form/FormStar";
 
 export default function EntryFormUpdate({ id }: { id: number }) {
@@ -15,36 +15,11 @@ export default function EntryFormUpdate({ id }: { id: number }) {
   const [entry, setEntry] = useState<SelectEntry | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const data: SelectEntry = await getUpdateEntry(id);
-  //     setEntry({
-  //       id: data.id,
-  //       title: data.title,
-  //       genre: data.genre,
-  //       year: data.year,
-  //       category: data.category,
-  //       month: data.month,
-  //       author: data.author ?? "",
-  //       director: data.director ?? "",
-  //       writer: data.writer ?? "",
-  //       publisher: data.publisher ?? "",
-  //       developer: data.developer ?? "",
-  //       description: data.description ?? "",
-  //       rating: data.rating ?? null,
-  //       createdAt: data.createdAt ? new Date(data.createdAt) : new Date(),
-  //       updatedAt: data.updatedAt ? new Date(data.updatedAt) : new Date(),
-  //       user_id: data.user_id ?? "",
-  //     });
-  //     setCategory(data?.category || "Book");
-  //   })();
-  // }, [id]);
-
   useEffect(() => {
     (async () => {
       try {
         setIsLoading(true);
-        const data = await getUpdateEntry(id); // Remove type annotation
+        const data = await getUpdateEntry(id);
         setEntry(data);
         setCategory(data?.category || "Book");
       } catch (error) {
@@ -55,7 +30,6 @@ export default function EntryFormUpdate({ id }: { id: number }) {
     })();
   }, [id]);
 
-  // Don't render the form until data is loaded
   if (isLoading || !entry) {
     return (
       <section className="flex w-screen justify-center mb-12">
@@ -134,14 +108,14 @@ export default function EntryFormUpdate({ id }: { id: number }) {
                 <FormInput
                   title="Director"
                   name="director"
-                  defaultValue={entry.director || ""} // Ensure director is defined
+                  defaultValue={entry.director || ""}
                 />
               </div>
               <div className="flex flex-col">
                 <FormInput
                   title="Writer"
                   name="writer"
-                  defaultValue={entry.writer || ""} // Ensure writer is defined
+                  defaultValue={entry.writer || ""}
                 />
               </div>
             </>
