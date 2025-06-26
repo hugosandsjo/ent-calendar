@@ -4,15 +4,15 @@ import { useEffect, useState } from "react";
 import { getEntry } from "@/src/app/actions/actions";
 import Link from "next/link";
 import RatingTag from "@/src/app/components/form/RatingTag";
-import { SelectEntry } from "@/src/db/schema";
 import { deleteEntry } from "@/src/app/actions/actions";
+import { InsertEntry } from "@/src/db/schema";
 
 type PageProps = {
   params: Promise<{ entryId: string }>;
 };
 
 export default function UpdateEntryPage({ params }: PageProps) {
-  const [entry, setEntry] = useState<any>(null);
+  const [entry, setEntry] = useState<InsertEntry>({} as InsertEntry);
   const [entryId, setEntryId] = useState<string>("");
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function UpdateEntryPage({ params }: PageProps) {
               <h2 className="border rounded-3xl py-1 px-2">{entry.director}</h2>
               <h2 className="border rounded-3xl py-1 px-2">{entry.year}</h2>
             </div>
-            <RatingTag rating={entry.rating} />
+            <RatingTag rating={entry.rating ?? undefined} />
             <p className="text-lg">{entry.description}</p>
           </div>
         ) : (
