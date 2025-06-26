@@ -3,8 +3,23 @@
 import { redirect } from "next/navigation";
 import { db } from "@/src/db";
 import { entries } from "@/src/db/schema";
+import { createClient } from "@/src/lib/supabase/server";
 
 export const addEntry = async (formData: FormData) => {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    throw new Error("User not authenticated");
+  }
+
+  // Add this debug log to check user.id
+  console.log("User ID:", user.id);
+  console.log("User object:", user);
+
   const title = formData.get("title")?.toString() || null;
   const category = formData.get("category")?.toString() || null;
   const genre = formData.get("genre")?.toString() || null;
@@ -24,6 +39,7 @@ export const addEntry = async (formData: FormData) => {
     month,
     rating,
     formDataEntries: Object.fromEntries(formData.entries()),
+    userId: user.id,
   });
 
   let author = null;
@@ -46,6 +62,8 @@ export const addEntry = async (formData: FormData) => {
     throw new Error("Missing required form data");
   }
 
+  console.log("About to insert with user_id:", user.id);
+
   await db.insert(entries).values({
     title,
     category,
@@ -59,6 +77,7 @@ export const addEntry = async (formData: FormData) => {
     publisher,
     developer,
     rating,
+    user_id: user.id,
   });
 
   redirect("/dashboard");

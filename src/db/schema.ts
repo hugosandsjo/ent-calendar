@@ -19,6 +19,7 @@ export const entries = pgTable("entries", {
   writer: text("writer"),
   publisher: text("publisher"),
   developer: text("developer"),
+  user_id: text("user_id").notNull(),
 });
 
 export type InsertEntry = typeof entries.$inferInsert;
