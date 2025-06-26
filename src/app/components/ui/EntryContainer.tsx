@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Entry, { EntryProps } from "@/src/app/components/ui/Entry";
+import Entry from "@/src/app/components/ui/Entry";
 import { SelectEntry } from "@/src/db/schema";
 
 type EntryContainerProps = {
