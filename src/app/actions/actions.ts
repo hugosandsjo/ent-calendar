@@ -17,10 +17,6 @@ export const addEntry = async (formData: FormData) => {
     throw new Error("User not authenticated");
   }
 
-  // Add this debug log to check user.id
-  console.log("User ID:", user.id);
-  console.log("User object:", user);
-
   const title = formData.get("title")?.toString() || null;
   const category = formData.get("category")?.toString() || null;
   const genre = formData.get("genre")?.toString() || null;
@@ -62,8 +58,6 @@ export const addEntry = async (formData: FormData) => {
   if (!title || !category || !genre || !year || !description || !month) {
     throw new Error("Missing required form data");
   }
-
-  console.log("About to insert with user_id:", user.id);
 
   await db.insert(entries).values({
     title,
