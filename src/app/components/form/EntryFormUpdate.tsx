@@ -73,11 +73,11 @@ export default function EntryFormUpdate({ id }: { id: number }) {
   };
 
   return (
-    <section className="flex w-screen justify-center mb-12 p-8">
+    <section className="flex w-screen justify-center mb-12">
       <h1>Id: {id}</h1>
       <form
         ref={formRef}
-        className="flex flex-col p-1 gap-y-2 "
+        className="flex flex-col p-1 gap-y-2 w-3/6"
         onSubmit={handleFormSubmit}
       >
         <h1 className="text-5xl mb-4">Update Entry</h1>
