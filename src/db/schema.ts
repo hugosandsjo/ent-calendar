@@ -12,7 +12,7 @@ export const entries = pgTable("entries", {
     .defaultNow()
     .$onUpdate(() => new Date()),
   description: text("description").notNull(),
-  month: text("month"),
+  month: text("month").notNull(),
   rating: integer("rating"),
   author: text("author"),
   director: text("director"),

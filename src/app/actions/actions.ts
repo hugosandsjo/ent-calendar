@@ -59,7 +59,7 @@ export const addEntry = async (formData: FormData) => {
     developer = formData.get("developer")?.toString() || null;
   }
 
-  if (!title || !category || !genre || !year || !description) {
+  if (!title || !category || !genre || !year || !description || !month) {
     throw new Error("Missing required form data");
   }
 
