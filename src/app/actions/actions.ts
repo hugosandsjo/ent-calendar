@@ -93,6 +93,8 @@ export const getUpdateEntry = async (entryId: number) => {
 
   const entry = result[0];
 
+  console.log("getUpdateEntry result:", entry);
+
   return {
     id: entry.id,
     title: entry.title,
