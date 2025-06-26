@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { db } from "@/src/db";
-import { entries } from "@/src/db/schema";
+import { entries, SelectEntry } from "@/src/db/schema";
 import { createClient } from "@/src/lib/supabase/server";
 import { eq } from "drizzle-orm";
 
@@ -84,7 +84,9 @@ export const addEntry = async (formData: FormData) => {
   redirect("/dashboard");
 };
 
-export const getEntries = async (userId: string | null | undefined) => {
+export const getEntries = async (
+  userId: string | null | undefined
+): Promise<SelectEntry[]> => {
   try {
     if (!userId) {
       throw new Error("User sub is required to fetch entries.");
@@ -104,7 +106,7 @@ export const getEntries = async (userId: string | null | undefined) => {
     return result;
   } catch (error) {
     console.error("Error fetching entries:", error);
-    return { success: false, error: "Failed to fetch entries." };
+    return [];
   }
 };
 

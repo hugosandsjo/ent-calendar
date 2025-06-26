@@ -4,21 +4,9 @@ import { deleteEntry } from "@/src/app/actions/actions";
 import GenreTag from "@/src/app/components/ui/GenreTag";
 import Link from "next/link";
 import RatingTag from "@/src/app/components/form/RatingTag";
+import { SelectEntry } from "@/src/db/schema";
 
-export type EntryProps = {
-  id: number;
-  title: string;
-  category: "Book" | "Movie" | "Series" | "Game";
-  genre: string;
-  year: number | string;
-  description: string;
-  month: string;
-  author?: string;
-  director?: string;
-  writer?: string;
-  publisher?: string;
-  developer?: string;
-  rating?: number | undefined;
+export type EntryProps = SelectEntry & {
   onDelete: (id: number) => void;
   onUpdate: (id: number) => void;
 };
@@ -57,12 +45,12 @@ function Entry({
           <article className="flex flex-wrap gap-x-1">
             <InfoTag text={category} />
             <InfoTag text={year} />
-            <InfoTag text={author} />
-            <InfoTag text={director} />
-            <InfoTag text={writer} />
-            <InfoTag text={developer} />
-            <InfoTag text={publisher} />
-            <RatingTag rating={rating} />
+            <InfoTag text={author || undefined} />
+            <InfoTag text={director || undefined} />
+            <InfoTag text={writer || undefined} />
+            <InfoTag text={developer || undefined} />
+            <InfoTag text={publisher || undefined} />
+            <RatingTag rating={rating || undefined} />
           </article>
           <article className="flex">
             <GenreTag text={genre} />

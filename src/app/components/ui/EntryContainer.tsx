@@ -2,14 +2,16 @@
 
 import React, { useState, useEffect } from "react";
 import Entry, { EntryProps } from "@/src/app/components/ui/Entry";
+import { SelectEntry } from "@/src/db/schema";
 
 type EntryContainerProps = {
   month: string;
-  entries: EntryProps[];
+  entries: SelectEntry[];
 };
 
 function EntryContainer({ month, entries }: EntryContainerProps) {
-  const [filteredEntries, setFilteredEntries] = useState<EntryProps[]>(entries);
+  const [filteredEntries, setFilteredEntries] =
+    useState<SelectEntry[]>(entries);
 
   useEffect(() => {
     setFilteredEntries(entries.filter((entry) => entry.month === month));
@@ -25,19 +27,7 @@ function EntryContainer({ month, entries }: EntryContainerProps) {
         {filteredEntries.map((entry) => (
           <Entry
             key={entry.id}
-            id={entry.id}
-            title={entry.title}
-            category={entry.category}
-            year={entry.year}
-            genre={entry.genre}
-            author={entry.author}
-            director={entry.director}
-            writer={entry.writer}
-            description={entry.description}
-            publisher={entry.publisher}
-            developer={entry.developer}
-            month={entry.month}
-            rating={entry.rating}
+            {...entry}
             onDelete={updateUIAfterDelete}
             onUpdate={updateUIAfterDelete}
           />

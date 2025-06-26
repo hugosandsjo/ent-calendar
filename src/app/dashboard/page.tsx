@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getEntries } from "@/src/app/actions/actions";
 import EntryContainer from "@/src/app/components/ui/EntryContainer";
+import { SelectEntry } from "@/src/db/schema";
 
 export default async function Dashboard() {
   const supabase = await createClient();
@@ -40,7 +41,7 @@ export default async function Dashboard() {
 
   const data = await getEntries(user.id);
 
-  const entries = Array.isArray(data) ? (data as any[]) : [];
+  const entries: SelectEntry[] = data;
 
   const uniqueMonths = Array.from(
     new Set(
