@@ -108,8 +108,8 @@ export const getEntry = async (id: number) => {
   console.log("getEntry", id);
   const result = await db.select().from(entries).where(eq(entries.id, id));
   //   const result = await sql`SELECT * FROM entries WHERE id = ${id}`;
-  //   const entries = result.rows;
-  return result;
+  const entry = result[0];
+  return entry;
 };
 
 export const getUpdateEntry = async (entryId: number) => {
@@ -117,20 +117,26 @@ export const getUpdateEntry = async (entryId: number) => {
 
   console.log("getUpdateEntry result:", result);
 
-  // return {
-  //   id: entry.id,
-  //   title: entry.title,
-  //   category: entry.category,
-  //   genre: entry.genre,
-  //   year: entry.year,
-  //   description: entry.description,
-  //   author: entry.author,
-  //   director: entry.director,
-  //   writer: entry.writer,
-  //   publisher: entry.publisher,
-  //   developer: entry.developer,
-  //   month: entry.month,
-  // };
+  const entry = result[0];
+
+  return {
+    id: entry.id,
+    title: entry.title,
+    category: entry.category,
+    genre: entry.genre,
+    year: entry.year,
+    description: entry.description,
+    author: entry.author,
+    director: entry.director,
+    writer: entry.writer,
+    publisher: entry.publisher,
+    developer: entry.developer,
+    month: entry.month,
+    rating: entry.rating,
+    createdAt: entry.createdAt ? new Date(entry.createdAt) : new Date(),
+    updatedAt: entry.updatedAt ? new Date(entry.updatedAt) : new Date(),
+    user_id: entry.user_id,
+  };
 };
 
 export const updateEntry = async (id: number, formData: FormData) => {

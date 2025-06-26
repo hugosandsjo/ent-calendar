@@ -26,14 +26,12 @@ export default function UpdateEntryPage({ params }: PageProps) {
     if (entryId) {
       const fetchEntry = async () => {
         const data = await getEntry(Number(entryId));
-        console.log("Fetched entry data from updateentrypage:", data);
         setEntry(data);
       };
 
       fetchEntry();
     }
   }, [entryId]);
-  console.log("Entry data:", entry);
 
   return (
     <section className="flex justify-center py-14">
