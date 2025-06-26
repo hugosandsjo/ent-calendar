@@ -18,7 +18,7 @@ function EntrySlider({ month, entries }: EntrySliderProps) {
   }, [entries, month]);
 
   return (
-    <section className="relative -left-12">
+    <section className="relative -left-10">
       <div className="flex w-[calc(100%+6rem)] gap-6 overflow-x-auto first:pl-10 last:pr-10 scrollbar-hide">
         {filteredEntries.map((entry) => (
           <Entry key={entry.id} {...entry} />

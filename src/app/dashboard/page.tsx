@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { getEntries } from "@/src/app/actions/actions";
 import EntrySlider from "@/src/app/components/ui/EntrySlider";
 import { SelectEntry } from "@/src/db/schema";
+import { capitalizeFirstLetter } from "@/src/lib/utils";
 
 export default async function Dashboard() {
   const supabase = await createClient();
@@ -31,10 +32,6 @@ export default async function Dashboard() {
     "december",
   ];
 
-  function capitalizeFirstLetter(string: string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
   if (!user) {
     return <div>Please log in to see your entries.</div>;
   }
@@ -59,7 +56,7 @@ export default async function Dashboard() {
         <button>Back to Home</button>
       </Link>
       {uniqueMonths.map((month) => (
-        <div key={month}>
+        <div className="bg-green-200" key={month}>
           <h1 className="text-6xl mb-8">{capitalizeFirstLetter(month)}</h1>
           <EntrySlider
             month={month}
