@@ -85,18 +85,10 @@ export const getEntries = async (
     if (!userId) {
       throw new Error("User sub is required to fetch entries.");
     }
-
-    //  const result = await sql`
-    //    SELECT * FROM entries WHERE user_sub = ${userSub}
-    //  `;
-
     const result = await db
       .select()
       .from(entries)
       .where(eq(entries.user_id, userId));
-    // console.log("getEntries result:", result);
-    //  const entries = result.rows;
-    //  console.log("This is a test", entries);
     return result;
   } catch (error) {
     console.error("Error fetching entries:", error);
@@ -140,50 +132,64 @@ export const getUpdateEntry = async (entryId: number) => {
 };
 
 export const updateEntry = async (id: number, formData: FormData) => {
-  console.log("updateEntry", id);
-  console.log("Form data:", Object.fromEntries(formData.entries()));
-  // const title = formData.get("title") as string | null;
-  // const category = formData.get("category") as string | null;
-  // const genre = formData.get("genre") as string | null;
-  // const year = formData.get("year") as number | null;
-  // const description = formData.get("description") as string | null;
-  // const month = formData.get("month") as string | null;
-  // const rating = formData.get("rating") as number | null;
-  // let author = null;
-  // let director = null;
-  // let writer = null;
-  // let publisher = null;
-  // let developer = null;
-  // if (category === "Book") {
-  //   author = formData.get("author") as string | null;
-  // } else if (category === "Movie" || category === "Series") {
-  //   director = formData.get("director") as string | null;
-  //   writer = formData.get("writer") as string | null;
-  // } else if (category === "Game") {
-  //   publisher = formData.get("publisher") as string | null;
-  //   developer = formData.get("developer") as string | null;
-  // }
-  // if (!title || !category || !genre || !year || !description || !month) {
-  //   throw new Error("Missing required form data");
-  // }
-  //   await sql`
-  //   UPDATE entries
-  //   SET
-  //     title = ${title},
-  //     category = ${category},
-  //     genre = ${genre},
-  //     year = ${year},
-  //     description = ${description},
-  //     month = ${month},
-  //     author = ${author},
-  //     director = ${director},
-  //     writer = ${writer},
-  //     publisher = ${publisher},
-  //     developer = ${developer},
-  //     rating = ${rating}
-  //   WHERE id = ${id}
-  // `;
-  //   redirect("/dashboard");
+  const title = formData.get("title") as string | null;
+  const category = formData.get("category") as string | null;
+  const genre = formData.get("genre") as string | null;
+  const year = formData.get("year") as number | null;
+  const description = formData.get("description") as string | null;
+  const month = formData.get("month") as string | null;
+  const rating = formData.get("rating") as number | null;
+  let author = null;
+  let director = null;
+  let writer = null;
+  let publisher = null;
+  let developer = null;
+  if (category === "Book") {
+    author = formData.get("author") as string | null;
+  } else if (category === "Movie" || category === "Series") {
+    director = formData.get("director") as string | null;
+    writer = formData.get("writer") as string | null;
+  } else if (category === "Game") {
+    publisher = formData.get("publisher") as string | null;
+    developer = formData.get("developer") as string | null;
+  }
+  if (!title || !category || !genre || !year || !description || !month) {
+    throw new Error("Missing required form data");
+  }
+  console.log("Update Entry Data:", {
+    id,
+    title,
+    category,
+    genre,
+    year,
+    description,
+    month,
+    author,
+    director,
+    writer,
+    publisher,
+    developer,
+    rating,
+  });
+
+  await db
+    .update(entries)
+    .set({
+      title,
+      category,
+      genre,
+      year,
+      description,
+      month,
+      author,
+      director,
+      writer,
+      publisher,
+      developer,
+      rating,
+    })
+    .where(eq(entries.id, id));
+  redirect("/dashboard");
 };
 
 export const deleteEntry = async (id: number) => {
