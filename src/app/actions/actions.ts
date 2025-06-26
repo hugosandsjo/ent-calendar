@@ -6,7 +6,7 @@ import { entries, SelectEntry } from "@/src/db/schema";
 import { createClient } from "@/src/lib/supabase/server";
 import { eq } from "drizzle-orm";
 
-export const addEntry = async (formData: FormData) => {
+export const addEntry = async (formData: FormData): Promise<void> => {
   const supabase = await createClient();
   const {
     data: { user },
@@ -66,9 +66,7 @@ export const addEntry = async (formData: FormData) => {
   redirect("/dashboard");
 };
 
-export const getEntries = async (
-  userId: string | null | undefined
-): Promise<SelectEntry[]> => {
+export const getEntries = async (userId: string): Promise<SelectEntry[]> => {
   try {
     if (!userId) {
       throw new Error("User sub is required to fetch entries.");
@@ -84,8 +82,7 @@ export const getEntries = async (
   }
 };
 
-export const getEntry = async (id: number) => {
-  console.log("getEntry", id);
+export const getEntry = async (id: number): Promise<SelectEntry> => {
   const result = await db.select().from(entries).where(eq(entries.id, id));
   const entry = result[0];
   return entry;
@@ -116,7 +113,10 @@ export const getUpdateEntry = async (entryId: number) => {
   };
 };
 
-export const updateEntry = async (id: number, formData: FormData) => {
+export const updateEntry = async (
+  id: number,
+  formData: FormData
+): Promise<void> => {
   const title = formData.get("title") as string | null;
   const category = formData.get("category") as string | null;
   const genre = formData.get("genre") as string | null;
@@ -162,7 +162,7 @@ export const updateEntry = async (id: number, formData: FormData) => {
   redirect("/dashboard");
 };
 
-export const deleteEntry = async (id: number) => {
+export const deleteEntry = async (id: number): Promise<void> => {
   await db.delete(entries).where(eq(entries.id, id));
   redirect("/dashboard");
 };

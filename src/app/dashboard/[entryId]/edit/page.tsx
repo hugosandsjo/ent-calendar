@@ -6,6 +6,5 @@ type PageProps = {
 
 export default async function Edit({ params }: PageProps) {
   const entryId = await params;
-
   return <EntryFormUpdate id={Number(entryId)} />;
 }
