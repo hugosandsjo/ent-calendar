@@ -2,7 +2,7 @@ import { createClient } from "@/src/lib/supabase/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getEntries } from "@/src/app/actions/actions";
-import EntryContainer from "@/src/app/components/ui/EntryContainer";
+import EntrySlider from "@/src/app/components/ui/EntrySlider";
 import { SelectEntry } from "@/src/db/schema";
 
 export default async function Dashboard() {
@@ -51,8 +51,6 @@ export default async function Dashboard() {
     )
   ).sort((a, b) => monthOrder.indexOf(a) - monthOrder.indexOf(b));
 
-  console.log("Sorted Unique Months:", uniqueMonths);
-
   return (
     <main className="p-10 flex flex-col gap-10">
       <h1>Dashboard</h1>
@@ -63,7 +61,7 @@ export default async function Dashboard() {
       {uniqueMonths.map((month) => (
         <div key={month}>
           <h1 className="text-6xl mb-8">{capitalizeFirstLetter(month)}</h1>
-          <EntryContainer
+          <EntrySlider
             month={month}
             entries={entries.filter(
               (entry) => entry.month.toLowerCase() === month

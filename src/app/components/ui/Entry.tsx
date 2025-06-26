@@ -37,9 +37,9 @@ function Entry({
           </article>
         </div>
       </div>
-      <div>
-        <p>{description}</p>
-      </div>
+
+      <p>{description}</p>
+
       <div className="flex gap-2 justify-between">
         <div className="flex">
           <Link href={`dashboard/${id}`}>

@@ -27,18 +27,6 @@ export const addEntry = async (formData: FormData) => {
   const ratingStr = formData.get("rating")?.toString();
   const rating = ratingStr ? parseInt(ratingStr, 10) : null;
 
-  console.log("Form data debug:", {
-    title,
-    category,
-    genre,
-    year,
-    description,
-    month,
-    rating,
-    formDataEntries: Object.fromEntries(formData.entries()),
-    userId: user.id,
-  });
-
   let author = null;
   let director = null;
   let writer = null;

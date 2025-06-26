@@ -4,12 +4,12 @@ import React, { useState, useEffect } from "react";
 import Entry from "@/src/app/components/ui/Entry";
 import { SelectEntry } from "@/src/db/schema";
 
-type EntryContainerProps = {
+type EntrySliderProps = {
   month: string;
   entries: SelectEntry[];
 };
 
-function EntryContainer({ month, entries }: EntryContainerProps) {
+function EntrySlider({ month, entries }: EntrySliderProps) {
   const [filteredEntries, setFilteredEntries] =
     useState<SelectEntry[]>(entries);
 
@@ -17,12 +17,8 @@ function EntryContainer({ month, entries }: EntryContainerProps) {
     setFilteredEntries(entries.filter((entry) => entry.month === month));
   }, [entries, month]);
 
-  const updateUIAfterDelete = (id: number) => {
-    setFilteredEntries(filteredEntries.filter((entry) => entry.id !== id));
-  };
-
   return (
-    <section className="relative -left-12 ">
+    <section className="relative -left-12">
       <div className="flex w-[calc(100%+6rem)] gap-6 overflow-x-auto first:pl-10 last:pr-10 scrollbar-hide">
         {filteredEntries.map((entry) => (
           <Entry key={entry.id} {...entry} />
@@ -32,4 +28,4 @@ function EntryContainer({ month, entries }: EntryContainerProps) {
   );
 }
 
-export default EntryContainer;
+export default EntrySlider;
