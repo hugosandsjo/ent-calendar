@@ -94,7 +94,7 @@ export const getEntries = async (
       .select()
       .from(entries)
       .where(eq(entries.user_id, userId));
-    console.log("getEntries result:", result);
+    // console.log("getEntries result:", result);
     //  const entries = result.rows;
     //  console.log("This is a test", entries);
     return result;
@@ -106,31 +106,31 @@ export const getEntries = async (
 
 export const getEntry = async (id: number) => {
   console.log("getEntry", id);
+  const result = await db.select().from(entries).where(eq(entries.id, id));
   //   const result = await sql`SELECT * FROM entries WHERE id = ${id}`;
   //   const entries = result.rows;
-  //   return entries[0];
+  return result;
 };
 
-export const getUpdateEntry = async (id: number) => {
-  const entry = id;
-  console.log("getUpdateEntry", entry);
-  //   const result = await sql`SELECT * FROM entries WHERE id = ${id}`;
-  //   const entry = result.rows[0];
-  //   console.log("getUpdateEntry", entry);
-  //   return {
-  //     id: entry.id,
-  //     title: entry.title,
-  //     category: entry.category,
-  //     genre: entry.genre,
-  //     year: entry.year,
-  //     description: entry.description,
-  //     author: entry.author,
-  //     director: entry.director,
-  //     writer: entry.writer,
-  //     publisher: entry.publisher,
-  //     developer: entry.developer,
-  //     month: entry.month,
-  //   };
+export const getUpdateEntry = async (entryId: number) => {
+  const result = await db.select().from(entries).where(eq(entries.id, entryId));
+
+  console.log("getUpdateEntry result:", result);
+
+  // return {
+  //   id: entry.id,
+  //   title: entry.title,
+  //   category: entry.category,
+  //   genre: entry.genre,
+  //   year: entry.year,
+  //   description: entry.description,
+  //   author: entry.author,
+  //   director: entry.director,
+  //   writer: entry.writer,
+  //   publisher: entry.publisher,
+  //   developer: entry.developer,
+  //   month: entry.month,
+  // };
 };
 
 export const updateEntry = async (id: number, formData: FormData) => {
