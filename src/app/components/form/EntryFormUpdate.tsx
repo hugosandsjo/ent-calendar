@@ -35,8 +35,6 @@ export default function EntryFormUpdate({ id }: { id: number }) {
   useEffect(() => {
     (async () => {
       const data: EntryData = await getUpdateEntry(id);
-      console.log(data);
-      console.log(data.month);
       setEntry({
         id: data.id,
         title: data.title,

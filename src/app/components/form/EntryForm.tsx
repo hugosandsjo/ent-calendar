@@ -1,46 +1,25 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-
-// import { useUser } from "@auth0/nextjs-auth0/client";
 import RadioButton from "@/src/app/components/form/RadioButton";
 import { addEntry } from "@/src/app/actions/actions";
 import FormInput from "@/src/app/components/form/FormInput";
 import FormInputLarge from "@/src/app/components/form/FormInputLarge";
-// import FormMonth from "@/src/app/components/form/FormMonth";
 import FormStar from "@/src/app/components/form/FormStar";
+import FormMonth from "@/src/app/components/form/FormMonth";
 
 export default function EntryForm() {
-  //   const { user, isLoading } = useUser();
   const formRef = useRef<HTMLFormElement>(null);
   const [category, setCategory] = useState<string>("Book");
-  //   const [month, setMonth] = useState<string>("");
-
-  //   useEffect(() => {
-  //     if (user && formRef.current) {
-  //       const userSubInput =
-  //         formRef.current.querySelector<HTMLInputElement>("#user_sub");
-  //       if (userSubInput) {
-  //         userSubInput.value = user.sub ?? "";
-  //       }
-  //     }
-  //   }, [user]);
-
-  //   if (isLoading) {
-  //     return <div>Loading...</div>;
-  //   }
-
-  //   if (!user) {
-  //     return <div>Please log in to submit an entry.</div>;
-  //   }
+  const [month, setMonth] = useState<string>("");
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(e.target.value);
   };
 
-  //   const handleMonthChange = (month: string) => {
-  //     setMonth(month);
-  //   };
+  const handleMonthChange = (month: string) => {
+    setMonth(month);
+  };
 
   return (
     <>
@@ -51,7 +30,7 @@ export default function EntryForm() {
           action={addEntry}
         >
           <h1 className="text-5xl mb-4">New Entry</h1>
-          {/* <FormMonth onChange={handleMonthChange} /> */}
+          <FormMonth onChange={handleMonthChange} />
           <label htmlFor="category">Category</label>
           <div className="flex gap-2 my-2 py-2">
             {["Book", "Movie", "Series", "Game"].map((cat) => (
