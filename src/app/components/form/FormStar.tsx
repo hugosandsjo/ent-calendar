@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 
-export default function FormStar() {
-  const [rating, setRating] = useState<number | null>(null);
+type FormStarProps = {
+  defaultValue?: number | null;
+};
+
+export default function FormStar({ defaultValue }: FormStarProps) {
+  const [rating, setRating] = useState<number | null>(defaultValue || null);
   const [hover, setHover] = useState<number | null>(null);
+
+  // Update rating when defaultValue changes
+  useEffect(() => {
+    setRating(defaultValue || null);
+  }, [defaultValue]);
 
   return (
     <>
@@ -18,7 +27,8 @@ export default function FormStar() {
                 name="rating"
                 value={currentRating}
                 className="hidden"
-                onClick={() => setRating(currentRating)}
+                checked={rating === currentRating}
+                onChange={() => setRating(currentRating)}
               />
               <FaStar
                 size={30}

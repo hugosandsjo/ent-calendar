@@ -119,13 +119,16 @@ export const updateEntry = async (
   id: number,
   formData: FormData
 ): Promise<void> => {
-  const title = formData.get("title") as string | null;
-  const category = formData.get("category") as string | null;
-  const genre = formData.get("genre") as string | null;
-  const year = formData.get("year") as number | null;
-  const description = formData.get("description") as string | null;
-  const month = formData.get("month") as string | null;
-  const rating = formData.get("rating") as number | null;
+  const title = formData.get("title")?.toString() || null;
+  const category = formData.get("category")?.toString() || null;
+  const genre = formData.get("genre")?.toString() || null;
+  const yearStr = formData.get("year")?.toString();
+  const year = yearStr ? parseInt(yearStr, 10) : null;
+  const description = formData.get("description")?.toString() || null;
+  const month = formData.get("month")?.toString() || null;
+  const ratingStr = formData.get("rating")?.toString();
+  const rating = ratingStr ? parseInt(ratingStr, 10) : null;
+
   let author = null;
   let director = null;
   let writer = null;

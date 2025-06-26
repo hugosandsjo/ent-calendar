@@ -140,11 +140,11 @@ export default function EntryFormUpdate({ id }: { id: number }) {
             </>
           )}
         </article>
-        <FormStar />
+        <FormStar defaultValue={entry.rating} />
         <FormInputLarge
           title="Description"
           name="description"
-          defaultValue={entry?.description}
+          defaultValue={entry.description}
         />
 
         <button
