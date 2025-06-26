@@ -1,5 +1,11 @@
 import EntryFormUpdate from "@/src/app/components/form/EntryFormUpdate";
 
-export default function Edit({ params }: { params: { entryId: number } }) {
-  return <EntryFormUpdate id={params.entryId} />;
+type PageProps = {
+  params: Promise<{ entryId: string }>;
+};
+
+export default async function Edit({ params }: PageProps) {
+  const entryId = await params;
+
+  return <EntryFormUpdate id={Number(entryId)} />;
 }
