@@ -46,8 +46,8 @@ export default async function Dashboard() {
   const uniqueMonths = Array.from(
     new Set(
       entries
-        .map((entry) => entry.month?.toLowerCase()) // Use optional chaining
-        .filter((month) => month !== null && month !== undefined) // Filter out null/undefined values
+        .map((entry) => entry.month?.toLowerCase())
+        .filter((month) => month !== null && month !== undefined)
     )
   ).sort((a, b) => monthOrder.indexOf(a) - monthOrder.indexOf(b));
 
@@ -67,7 +67,7 @@ export default async function Dashboard() {
             month={month}
             entries={entries.filter(
               (entry) => entry.month.toLowerCase() === month
-            )} // Filter entries for this month
+            )}
           />
         </div>
       ))}

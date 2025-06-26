@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { getEntry } from "@/src/app/actions/actions";
 import Link from "next/link";
 import RatingTag from "@/src/app/components/form/RatingTag";
+import { SelectEntry } from "@/src/db/schema";
+import { deleteEntry } from "@/src/app/actions/actions";
 
 type PageProps = {
   params: Promise<{ entryId: string }>;
@@ -32,6 +34,10 @@ export default function UpdateEntryPage({ params }: PageProps) {
       fetchEntry();
     }
   }, [entryId]);
+
+  const handleDeleteClick = async (id: string) => {
+    await deleteEntry(Number(id));
+  };
 
   return (
     <section className="flex justify-center py-14">
@@ -62,6 +68,14 @@ export default function UpdateEntryPage({ params }: PageProps) {
             Edit
           </button>
         </Link>
+        <div className="flex gap-x-2">
+          <button
+            className="border hover:bg-red-500 py-2 px-4 rounded-xl"
+            onClick={() => handleDeleteClick(entryId)}
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </section>
   );

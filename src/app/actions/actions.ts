@@ -99,15 +99,12 @@ export const getEntries = async (
 export const getEntry = async (id: number) => {
   console.log("getEntry", id);
   const result = await db.select().from(entries).where(eq(entries.id, id));
-  //   const result = await sql`SELECT * FROM entries WHERE id = ${id}`;
   const entry = result[0];
   return entry;
 };
 
 export const getUpdateEntry = async (entryId: number) => {
   const result = await db.select().from(entries).where(eq(entries.id, entryId));
-
-  console.log("getUpdateEntry result:", result);
 
   const entry = result[0];
 
@@ -156,21 +153,6 @@ export const updateEntry = async (id: number, formData: FormData) => {
   if (!title || !category || !genre || !year || !description || !month) {
     throw new Error("Missing required form data");
   }
-  console.log("Update Entry Data:", {
-    id,
-    title,
-    category,
-    genre,
-    year,
-    description,
-    month,
-    author,
-    director,
-    writer,
-    publisher,
-    developer,
-    rating,
-  });
 
   await db
     .update(entries)
@@ -193,6 +175,6 @@ export const updateEntry = async (id: number, formData: FormData) => {
 };
 
 export const deleteEntry = async (id: number) => {
-  console.log("deleteEntry", id);
-  //   await sql`DELETE FROM entries WHERE id = ${id}`;
+  await db.delete(entries).where(eq(entries.id, id));
+  redirect("/dashboard");
 };
