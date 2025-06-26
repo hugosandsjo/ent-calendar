@@ -88,7 +88,7 @@ export const getEntry = async (id: number): Promise<SelectEntry> => {
   return entry;
 };
 
-export const getUpdateEntry = async (entryId: number) => {
+export const getUpdateEntry = async (entryId: number): Promise<SelectEntry> => {
   const result = await db.select().from(entries).where(eq(entries.id, entryId));
 
   const entry = result[0];

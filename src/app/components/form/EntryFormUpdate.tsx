@@ -6,55 +6,63 @@ import RadioButton from "@/src/app/components/form/RadioButton";
 import FormInput from "@/src/app/components/form/FormInput";
 import FormInputLarge from "@/src/app/components/form/FormInputLarge";
 import FormMonth from "@/src/app/components/form/FormMonth";
-import { InsertEntry } from "@/src/db/schema";
+import { InsertEntry, SelectEntry } from "@/src/db/schema";
 import FormStar from "@/src/app/components/form/FormStar";
 
 export default function EntryFormUpdate({ id }: { id: number }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [category, setCategory] = useState<string>("Book");
-  const [entry, setEntry] = useState<InsertEntry>({
-    id: 0,
-    title: "",
-    genre: "",
-    year: 0,
-    category: "Book",
-    month: "",
-    author: "",
-    director: "",
-    writer: "",
-    publisher: "",
-    developer: "",
-    description: "",
-    rating: null,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    user_id: "",
-  });
+  const [entry, setEntry] = useState<SelectEntry | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const data: SelectEntry = await getUpdateEntry(id);
+  //     setEntry({
+  //       id: data.id,
+  //       title: data.title,
+  //       genre: data.genre,
+  //       year: data.year,
+  //       category: data.category,
+  //       month: data.month,
+  //       author: data.author ?? "",
+  //       director: data.director ?? "",
+  //       writer: data.writer ?? "",
+  //       publisher: data.publisher ?? "",
+  //       developer: data.developer ?? "",
+  //       description: data.description ?? "",
+  //       rating: data.rating ?? null,
+  //       createdAt: data.createdAt ? new Date(data.createdAt) : new Date(),
+  //       updatedAt: data.updatedAt ? new Date(data.updatedAt) : new Date(),
+  //       user_id: data.user_id ?? "",
+  //     });
+  //     setCategory(data?.category || "Book");
+  //   })();
+  // }, [id]);
 
   useEffect(() => {
     (async () => {
-      const data: InsertEntry = await getUpdateEntry(id);
-      setEntry({
-        id: data.id,
-        title: data.title,
-        genre: data.genre,
-        year: data.year,
-        category: data.category,
-        month: data.month,
-        author: data.author ?? "",
-        director: data.director ?? "",
-        writer: data.writer ?? "",
-        publisher: data.publisher ?? "",
-        developer: data.developer ?? "",
-        description: data.description ?? "",
-        rating: data.rating ?? null,
-        createdAt: data.createdAt ? new Date(data.createdAt) : new Date(),
-        updatedAt: data.updatedAt ? new Date(data.updatedAt) : new Date(),
-        user_id: data.user_id ?? "",
-      });
-      setCategory(data?.category || "Book");
+      try {
+        setIsLoading(true);
+        const data = await getUpdateEntry(id); // Remove type annotation
+        setEntry(data);
+        setCategory(data?.category || "Book");
+      } catch (error) {
+        console.error("Error fetching entry:", error);
+      } finally {
+        setIsLoading(false);
+      }
     })();
   }, [id]);
+
+  // Don't render the form until data is loaded
+  if (isLoading || !entry) {
+    return (
+      <section className="flex w-screen justify-center mb-12">
+        <div>Loading...</div>
+      </section>
+    );
+  }
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(e.target.defaultValue);
@@ -74,7 +82,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
 
   return (
     <section className="flex w-screen justify-center mb-12">
-      <h1>Id: {id}</h1>
+      {/* <h1>Id: {id}</h1> */}
       <form
         ref={formRef}
         className="flex flex-col p-1 gap-y-2 w-3/6"
@@ -91,9 +99,10 @@ export default function EntryFormUpdate({ id }: { id: number }) {
             />
           ))}
         </div>
-        <div className="flex flex-col">
+
+        <article className="flex flex-col">
           <FormInput title="Title" name="title" defaultValue={entry.title} />
-        </div>
+        </article>
         <article className="flex gap-4">
           <div className="flex flex-col">
             <FormMonth defaultValue={entry.month} />
@@ -144,14 +153,14 @@ export default function EntryFormUpdate({ id }: { id: number }) {
                 <FormInput
                   title="Publisher"
                   name="publisher"
-                  defaultValue={entry.publisher || ""} // Ensure publisher is defined
+                  defaultValue={entry.publisher || ""}
                 />
               </div>
               <div className="flex flex-col">
                 <FormInput
                   title="Developer"
                   name="developer"
-                  defaultValue={entry.developer || ""} // Ensure developer is defined
+                  defaultValue={entry.developer || ""}
                 />
               </div>
             </>

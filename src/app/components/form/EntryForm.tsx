@@ -24,36 +24,63 @@ export default function EntryForm() {
         action={addEntry}
       >
         <h1 className="text-5xl mb-4">New Entry</h1>
-        <FormMonth />
-        <label htmlFor="category">Category</label>
         <div className="flex gap-2 my-2 py-2">
-          {["Book", "Movie", "Series", "Game"].map((cat) => (
+          {["Book", "Movie", "Series", "Game"].map((formCategory) => (
             <RadioButton
-              key={cat}
-              category={cat}
+              key={formCategory}
+              category={formCategory}
               onChange={handleCategoryChange}
-              checked={category === cat}
+              checked={category === formCategory}
             />
           ))}
         </div>
-        <FormInput title="Title" name="title" />
-        <FormInput title="Genre" name="genre" />
-        <FormInput title="Year" name="year" />
 
-        {/* Some conditional input fields depending on the category */}
-        {category === "Book" && <FormInput title="Author" name="author" />}
-        {(category === "Movie" || category === "Series") && (
-          <>
-            <FormInput title="Director" name="director" />
-            <FormInput title="Writer" name="writer" />
-          </>
-        )}
-        {category === "Game" && (
-          <>
-            <FormInput title="Publisher" name="publisher" />
-            <FormInput title="Developer" name="developer" />
-          </>
-        )}
+        <article className="flex flex-col">
+          <FormInput title="Title" name="title" />
+        </article>
+        <article className="flex gap-4">
+          <div className="flex flex-col">
+            <FormMonth />
+          </div>
+          <div className="flex flex-col">
+            <FormInput title="Year" name="year" />
+          </div>
+        </article>
+        <article className="flex gap-4">
+          <div className="flex flex-col">
+            <FormInput title="Genre" name="genre" />
+          </div>
+        </article>
+        <article className="flex gap-4 flex-wrap">
+          {/* Conditionally render inputs based on category */}
+          {category === "Book" && (
+            <div className="flex flex-col">
+              <FormInput title="Author" name="author" />
+            </div>
+          )}
+
+          {(category === "Movie" || category === "Series") && (
+            <>
+              <div className="flex flex-col">
+                <FormInput title="Director" name="director" />
+              </div>
+              <div className="flex flex-col">
+                <FormInput title="Writer" name="writer" />
+              </div>
+            </>
+          )}
+
+          {category === "Game" && (
+            <>
+              <div className="flex flex-col">
+                <FormInput title="Publisher" name="publisher" />
+              </div>
+              <div className="flex flex-col">
+                <FormInput title="Developer" name="developer" />
+              </div>
+            </>
+          )}
+        </article>
         <FormStar />
         <FormInputLarge title="Description" name="description" />
         <button
