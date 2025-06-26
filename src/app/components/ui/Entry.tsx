@@ -21,7 +21,7 @@ function Entry({
 }: SelectEntry) {
   return (
     <div className="min-w-96 max-w-lg py-8 px-10 flex flex-col gap-4 justify-between border border-black">
-      <h1 className="text-4xl mb-3">{title}</h1>
+      <h1 className="text-4xl">{title}</h1>
       <div className="flex flex-col gap-2">
         <div className="flex flex-wrap gap-x-2">
           <InfoTag text={category} />
