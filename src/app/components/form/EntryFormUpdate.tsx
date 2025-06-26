@@ -11,6 +11,7 @@ import FormStar from "@/src/app/components/form/FormStar";
 
 export default function EntryFormUpdate({ id }: { id: number }) {
   const formRef = useRef<HTMLFormElement>(null);
+  const [category, setCategory] = useState<string>("Book");
   const [entry, setEntry] = useState<InsertEntry>({
     id: 0,
     title: "",
@@ -29,7 +30,6 @@ export default function EntryFormUpdate({ id }: { id: number }) {
     updatedAt: new Date(),
     user_id: "",
   });
-  const [category, setCategory] = useState<string>("Book");
 
   useEffect(() => {
     (async () => {
@@ -114,7 +114,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
               <FormInput
                 title="Author"
                 name="author"
-                defaultValue={entry.author || ""} // Ensure author is defined
+                defaultValue={entry.author || ""}
               />
             </div>
           )}

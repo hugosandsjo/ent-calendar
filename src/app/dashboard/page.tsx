@@ -56,7 +56,7 @@ export default async function Dashboard() {
         <button>Back to Home</button>
       </Link>
       {uniqueMonths.map((month) => (
-        <div className="bg-green-200" key={month}>
+        <div key={month}>
           <h1 className="text-6xl mb-8">{capitalizeFirstLetter(month)}</h1>
           <EntrySlider
             month={month}
