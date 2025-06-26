@@ -29,7 +29,6 @@ export default function EntryFormUpdate({ id }: { id: number }) {
     updatedAt: new Date(),
     user_id: "",
   });
-  const [month, setMonth] = useState<string>("");
   const [category, setCategory] = useState<string>("Book");
 
   useEffect(() => {
@@ -53,17 +52,12 @@ export default function EntryFormUpdate({ id }: { id: number }) {
         updatedAt: data.updatedAt ? new Date(data.updatedAt) : new Date(),
         user_id: data.user_id ?? "",
       });
-      setMonth(data?.month || "");
       setCategory(data?.category || "Book");
     })();
   }, [id]);
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(e.target.defaultValue);
-  };
-
-  const handleMonthChange = (month: string) => {
-    setMonth(month);
   };
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -102,7 +96,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
         </div>
         <article className="flex gap-4">
           <div className="flex flex-col">
-            <FormMonth value={entry.month} onChange={handleMonthChange} />
+            <FormMonth defaultValue={entry.month} />
           </div>
           <div className="flex flex-col">
             <FormInput title="Year" name="year" defaultValue={entry.year} />

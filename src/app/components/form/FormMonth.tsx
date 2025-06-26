@@ -1,12 +1,8 @@
 type MonthProps = {
-  value?: string;
-  onChange?: (month: string) => void;
+  defaultValue?: string;
 };
 
-export default function FormMonth({
-  value,
-  onChange,
-}: MonthProps & { onChange: (month: string) => void }) {
+export default function FormMonth({ defaultValue }: MonthProps) {
   return (
     <>
       <label htmlFor="options">Month</label>
@@ -14,8 +10,7 @@ export default function FormMonth({
         className="py-3.5 px-2 border border-black rounded-md"
         id="month"
         name="month"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
+        defaultValue={defaultValue}
       >
         <option value="january">January</option>
         <option value="february">February</option>

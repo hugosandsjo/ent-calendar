@@ -11,14 +11,9 @@ import FormMonth from "@/src/app/components/form/FormMonth";
 export default function EntryForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [category, setCategory] = useState<string>("Book");
-  const [month, setMonth] = useState<string>("");
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(e.target.value);
-  };
-
-  const handleMonthChange = (month: string) => {
-    setMonth(month);
   };
 
   return (
@@ -30,7 +25,7 @@ export default function EntryForm() {
           action={addEntry}
         >
           <h1 className="text-5xl mb-4">New Entry</h1>
-          <FormMonth onChange={handleMonthChange} />
+          <FormMonth />
           <label htmlFor="category">Category</label>
           <div className="flex gap-2 my-2 py-2">
             {["Book", "Movie", "Series", "Game"].map((cat) => (
