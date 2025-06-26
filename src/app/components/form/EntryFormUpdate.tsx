@@ -6,12 +6,12 @@ import RadioButton from "@/src/app/components/form/RadioButton";
 import FormInput from "@/src/app/components/form/FormInput";
 import FormInputLarge from "@/src/app/components/form/FormInputLarge";
 import FormMonth from "@/src/app/components/form/FormMonth";
-import { EntryData } from "@/src/app/components/ui/Entry";
+import { InsertEntry } from "@/src/db/schema";
 import FormStar from "@/src/app/components/form/FormStar";
 
 export default function EntryFormUpdate({ id }: { id: number }) {
   const formRef = useRef<HTMLFormElement>(null);
-  const [entry, setEntry] = useState<EntryData>({
+  const [entry, setEntry] = useState<InsertEntry>({
     id: 0,
     title: "",
     genre: "",
@@ -34,7 +34,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
 
   useEffect(() => {
     (async () => {
-      const data: EntryData = await getUpdateEntry(id);
+      const data: InsertEntry = await getUpdateEntry(id);
       setEntry({
         id: data.id,
         title: data.title,
@@ -80,6 +80,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
 
   return (
     <section className="flex w-screen justify-center mb-12 p-8">
+      <h1>Id: {id}</h1>
       <form
         ref={formRef}
         className="flex flex-col p-1 gap-y-2 "

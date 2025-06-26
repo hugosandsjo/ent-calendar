@@ -46,8 +46,8 @@ export default function UpdateEntryPage({ params }: PageProps) {
           <div className="hover:opacity-35">Back</div>
         </Link>
         {entry ? (
-          <div className="flex flex-col gap-1">
-            <h1 className="text-3xl mb-2 leading-tight">{entry.title}</h1>
+          <div className="flex flex-col gap-2">
+            <h1 className="text-3xl leading-tight">{entry.title}</h1>
             <div className="flex gap-x-2 mb-2 text-1xl flex-wrap gap-y-2">
               <h2 className="border rounded-3xl py-1 px-2">{entry.category}</h2>
               {entry.author ? (
@@ -56,25 +56,26 @@ export default function UpdateEntryPage({ params }: PageProps) {
               <h2 className="border rounded-3xl py-1 px-2">{entry.director}</h2>
               <h2 className="border rounded-3xl py-1 px-2">{entry.year}</h2>
             </div>
-            <p className="text-lg">{entry.description}</p>
             <RatingTag rating={entry.rating} />
+            <p className="text-lg">{entry.description}</p>
           </div>
         ) : (
           <p>Loading...</p>
         )}
-
-        <Link href={`/dashboard/${entryId}/edit`}>
-          <button className="border hover:bg-sky-300 py-2 px-4 rounded-xl">
-            Edit
-          </button>
-        </Link>
-        <div className="flex gap-x-2">
-          <button
-            className="border hover:bg-red-500 py-2 px-4 rounded-xl"
-            onClick={() => handleDeleteClick(entryId)}
-          >
-            Delete
-          </button>
+        <div className="flex gap-4 mt-4">
+          <Link href={`/dashboard/${entryId}/edit`}>
+            <button className="border hover:bg-sky-300 py-2 px-4 rounded-xl">
+              Edit
+            </button>
+          </Link>
+          <div className="flex gap-x-2">
+            <button
+              className="border hover:bg-red-500 py-2 px-4 rounded-xl"
+              onClick={() => handleDeleteClick(entryId)}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     </section>
