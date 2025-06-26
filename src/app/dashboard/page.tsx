@@ -54,7 +54,7 @@ export default async function Dashboard() {
   console.log("Sorted Unique Months:", uniqueMonths);
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen">
+    <main className="p-10 flex flex-col gap-10">
       <h1>Dashboard</h1>
       <p>Welcome to your dashboard, {user.email}!</p>
       <Link href="/">
