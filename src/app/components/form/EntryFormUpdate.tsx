@@ -151,7 +151,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
           type="submit"
           className="mt-4 p-4 border border-black rounded-md bg-black text-white hover:opacity-60"
         >
-          Submit
+          Update
         </button>
       </form>
     </section>
