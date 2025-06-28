@@ -59,7 +59,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
   return (
     <form
       ref={formRef}
-      className="flex flex-col p-1 gap-y-2 w-3/6"
+      className="flex flex-col p-1 gap-y-2"
       onSubmit={handleFormSubmit}
     >
       <section className="flex">
@@ -82,19 +82,20 @@ export default function EntryFormUpdate({ id }: { id: number }) {
       <article className="flex flex-col">
         <FormInput title="Title" name="title" defaultValue={entry.title} />
       </article>
-      <article className="flex gap-4">
+      <article className="flex gap-4 flex-wrap">
         <div className="flex flex-col">
           <FormMonth defaultValue={entry.month} />
         </div>
         <div className="flex flex-col">
           <FormInput title="Year" name="year" defaultValue={entry.year} />
         </div>
+        <article className="flex gap-4">
+          <div className="flex flex-col">
+            <FormInput title="Genre" name="genre" defaultValue={entry.genre} />
+          </div>
+        </article>
       </article>
-      <article className="flex gap-4">
-        <div className="flex flex-col">
-          <FormInput title="Genre" name="genre" defaultValue={entry.genre} />
-        </div>
-      </article>
+
       <article className="flex gap-4 flex-wrap">
         {/* Conditionally render inputs based on category */}
         {category === "Book" && (

@@ -19,11 +19,7 @@ export default function EntryForm() {
   };
 
   return (
-    <form
-      ref={formRef}
-      className="flex flex-col p-1 gap-y-2 w-3/6"
-      action={addEntry}
-    >
+    <form ref={formRef} className="flex flex-col p-1 gap-y-2" action={addEntry}>
       <section className="flex">
         <Link href="/dashboard" className="hover:opacity-60">
           <ArrowLeftIcon className="w-8 h-8" />

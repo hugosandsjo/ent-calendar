@@ -44,12 +44,15 @@ export default function UpdateEntryPage({ params }: PageProps) {
   return (
     <section className="flex justify-center py-14">
       <div className="w-10/12 px-10 py-12 flex flex-col gap-4 border border-black rounded-xl">
-        <Link href="/dashboard" className="hover:opacity-60">
-          <ArrowLeftIcon className="w-8 h-8 mb-4" />
-        </Link>
+        <div className="flex justify-between flex-col lg:flex-row">
+          <Link href="/dashboard" className="hover:opacity-60">
+            <ArrowLeftIcon className="w-8 h-8 mb-4" />
+          </Link>
+          <h1 className="text-5xl leading-tight">{entry.title}</h1>
+          <div></div>
+        </div>
         {entry ? (
           <div className="flex flex-col gap-2">
-            <h1 className="text-5xl leading-tight">{entry.title}</h1>
             <div className="flex gap-x-2 mb-2 text-1xl flex-wrap gap-y-2">
               <h2 className="border rounded-3xl py-1 px-2">{entry.category}</h2>
               {entry.author ? (
@@ -68,7 +71,7 @@ export default function UpdateEntryPage({ params }: PageProps) {
         ) : (
           <p>Loading...</p>
         )}
-        <div className="flex gap-4 mt-4 justify-between">
+        <div className="flex mt-4 lg:justify-end">
           <Link href={`/dashboard/${entryId}/edit`}>
             <button className="hover:bg-sky-300 py-2 px-3 rounded-xl">
               <EditIcon className="w-6 h-6 inline-block" />
@@ -76,7 +79,7 @@ export default function UpdateEntryPage({ params }: PageProps) {
           </Link>
           <div className="flex gap-x-2">
             <button
-              className="hover:bg-red-400 py-2 px-4 rounded-xl"
+              className="hover:bg-red-400 py-2 px-3 rounded-xl"
               onClick={() => handleDeleteClick(entryId)}
             >
               <TrashIcon className="w-6 h-6 inline-block" />
