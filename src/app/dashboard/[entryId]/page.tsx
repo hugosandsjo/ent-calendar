@@ -6,7 +6,8 @@ import Link from "next/link";
 import RatingTag from "@/src/app/components/form/RatingTag";
 import { deleteEntry } from "@/src/app/actions/actions";
 import { InsertEntry } from "@/src/db/schema";
-import { ArrowLeftIcon } from "@/src/app/components/Icons";
+import { ArrowLeftIcon, TrashIcon } from "@/src/app/components/Icons";
+import { EditIcon, Trash } from "lucide-react";
 
 type PageProps = {
   params: Promise<{ entryId: string }>;
@@ -67,10 +68,10 @@ export default function UpdateEntryPage({ params }: PageProps) {
         ) : (
           <p>Loading...</p>
         )}
-        <div className="flex gap-4 mt-4">
+        <div className="flex gap-4 mt-4 justify-between">
           <Link href={`/dashboard/${entryId}/edit`}>
-            <button className="border hover:bg-sky-300 py-2 px-4 rounded-xl">
-              Edit
+            <button className="border hover:bg-sky-300 py-2 px-3 rounded-xl">
+              <EditIcon className="w-6 h-6 inline-block" />
             </button>
           </Link>
           <div className="flex gap-x-2">
@@ -78,7 +79,7 @@ export default function UpdateEntryPage({ params }: PageProps) {
               className="border hover:bg-red-500 py-2 px-4 rounded-xl"
               onClick={() => handleDeleteClick(entryId)}
             >
-              Delete
+              <TrashIcon className="w-6 h-6 inline-block" />
             </button>
           </div>
         </div>

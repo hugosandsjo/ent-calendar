@@ -8,7 +8,7 @@ import FormInputLarge from "@/src/app/components/form/FormInputLarge";
 import FormStar from "@/src/app/components/form/FormStar";
 import FormMonth from "@/src/app/components/form/FormMonth";
 import { ArrowLeftIcon } from "@/src/app/components/Icons";
-import { Link } from "lucide-react";
+import Link from "next/link";
 
 export default function EntryForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -26,7 +26,7 @@ export default function EntryForm() {
     >
       <section className="flex">
         <Link href="/dashboard" className="hover:opacity-60">
-          <ArrowLeftIcon className="w-10 h-10" />
+          <ArrowLeftIcon className="w-8 h-8" />
         </Link>
       </section>
       <h1 className="text-5xl mb-4">New Entry</h1>

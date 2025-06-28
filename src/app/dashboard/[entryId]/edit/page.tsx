@@ -6,5 +6,9 @@ type PageProps = {
 
 export default async function EditPage({ params }: PageProps) {
   const { entryId } = await params;
-  return <EntryFormUpdate id={Number(entryId)} />;
+  return (
+    <section className="flex w-screen px-4 md:px-8 lg:justify-center mb-12">
+      <EntryFormUpdate id={Number(entryId)} />
+    </section>
+  );
 }
