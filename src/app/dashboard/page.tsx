@@ -54,7 +54,7 @@ export default async function Dashboard() {
 
       {uniqueMonths.map((month) => (
         <div key={month}>
-          <h1 className="text-6xl mb-8">{capitalizeFirstLetter(month)}</h1>
+          <h1 className="text-5xl mb-8">{capitalizeFirstLetter(month)}</h1>
           <EntrySlider
             month={month}
             entries={entries.filter(
