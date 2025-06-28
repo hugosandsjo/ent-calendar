@@ -1,6 +1,6 @@
 /* Import custom scrollbar styles */
 @import "../styles/scrollbar.css";
-@import "../styles/radiobutton.css";
+@import "../styles/RadioButton.css";
 
 @tailwind base;
 @tailwind components;
