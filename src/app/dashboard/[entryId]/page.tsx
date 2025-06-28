@@ -7,7 +7,7 @@ import RatingTag from "@/src/app/components/form/RatingTag";
 import { deleteEntry } from "@/src/app/actions/actions";
 import { InsertEntry } from "@/src/db/schema";
 import { ArrowLeftIcon, TrashIcon } from "@/src/app/components/Icons";
-import { EditIcon, Trash } from "lucide-react";
+import { EditIcon } from "lucide-react";
 
 type PageProps = {
   params: Promise<{ entryId: string }>;

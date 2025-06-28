@@ -1,5 +1,4 @@
 import { createClient } from "@/src/lib/supabase/server";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getEntries } from "@/src/app/actions/actions";
 import EntrySlider from "@/src/app/components/ui/EntrySlider";

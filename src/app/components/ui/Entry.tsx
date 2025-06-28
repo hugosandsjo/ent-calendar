@@ -4,7 +4,6 @@ import GenreTag from "@/src/app/components/ui/GenreTag";
 import Link from "next/link";
 import RatingTag from "@/src/app/components/form/RatingTag";
 import { SelectEntry } from "@/src/db/schema";
-import { Arrow } from "@radix-ui/react-dropdown-menu";
 import { ArrowOutwardIcon } from "@/src/app/components/Icons";
 
 function Entry({
@@ -26,7 +25,6 @@ function Entry({
       <div className="min-w-96 max-w-lg py-8 px-10 flex flex-col gap-4 hover:bg-gray-200 justify-between border border-black rounded-xl">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-4xl">{title}</h1>
-
           <ArrowOutwardIcon className="w-8 h-8" />
         </div>
         <div className="flex flex-col gap-2">
