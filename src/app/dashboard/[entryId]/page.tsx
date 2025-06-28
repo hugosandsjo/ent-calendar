@@ -53,7 +53,11 @@ export default function UpdateEntryPage({ params }: PageProps) {
               {entry.author ? (
                 <h2 className="border rounded-3xl py-1 px-2">{entry.author}</h2>
               ) : null}
-              <h2 className="border rounded-3xl py-1 px-2">{entry.director}</h2>
+              {entry.director ? (
+                <h2 className="border rounded-3xl py-1 px-2">
+                  {entry.director}
+                </h2>
+              ) : null}
               <h2 className="border rounded-3xl py-1 px-2">{entry.year}</h2>
             </div>
             <RatingTag rating={entry.rating ?? undefined} />
