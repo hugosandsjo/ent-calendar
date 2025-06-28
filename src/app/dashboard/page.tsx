@@ -50,11 +50,8 @@ export default async function Dashboard() {
 
   return (
     <main className="p-10 flex flex-col gap-10">
-      <h1>Dashboard</h1>
       <p>Welcome to your dashboard, {user.email}!</p>
-      <Link href="/">
-        <button>Back to Home</button>
-      </Link>
+
       {uniqueMonths.map((month) => (
         <div key={month}>
           <h1 className="text-6xl mb-8">{capitalizeFirstLetter(month)}</h1>

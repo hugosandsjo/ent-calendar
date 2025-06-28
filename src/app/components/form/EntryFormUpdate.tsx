@@ -55,7 +55,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
   };
 
   return (
-    <section className="flex w-screen justify-center mb-12">
+    <section className="flex w-screen px-4 md:px-8 lg:justify-center mb-12">
       {/* <h1>Id: {id}</h1> */}
       <form
         ref={formRef}

@@ -6,6 +6,7 @@ import Link from "next/link";
 import RatingTag from "@/src/app/components/form/RatingTag";
 import { deleteEntry } from "@/src/app/actions/actions";
 import { InsertEntry } from "@/src/db/schema";
+import { ArrowLeftIcon } from "@/src/app/components/Icons";
 
 type PageProps = {
   params: Promise<{ entryId: string }>;
@@ -42,12 +43,12 @@ export default function UpdateEntryPage({ params }: PageProps) {
   return (
     <section className="flex justify-center py-14">
       <div className="w-10/12 px-10 py-12 flex flex-col gap-4 border border-black">
-        <Link href="/dashboard">
-          <div className="hover:opacity-35">Back</div>
+        <Link href="/dashboard" className="hover:opacity-60">
+          <ArrowLeftIcon className="w-8 h-8 mb-4" />
         </Link>
         {entry ? (
           <div className="flex flex-col gap-2">
-            <h1 className="text-3xl leading-tight">{entry.title}</h1>
+            <h1 className="text-4xl leading-tight">{entry.title}</h1>
             <div className="flex gap-x-2 mb-2 text-1xl flex-wrap gap-y-2">
               <h2 className="border rounded-3xl py-1 px-2">{entry.category}</h2>
               {entry.author ? (
