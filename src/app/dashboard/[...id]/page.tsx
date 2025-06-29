@@ -4,22 +4,21 @@ import { useEffect, useState, use } from "react"; // Import 'use' from React
 import { getEntry, deleteEntry } from "@/src/app/actions/actions";
 import Link from "next/link";
 import RatingTag from "@/src/app/components/form/RatingTag";
-import { InsertEntry } from "@/src/db/schema";
+import { SelectEntry } from "@/src/db/schema";
 import { ArrowLeftIcon, TrashIcon } from "@/src/app/components/Icons";
 import { EditIcon } from "lucide-react";
-import EntryForm from "@/src/app/components/form/EntryForm"; // For 'create'
-import EntryFormUpdate from "@/src/app/components/form/EntryFormUpdate"; // For 'edit'
+import EntryForm from "@/src/app/components/form/EntryForm";
+import EntryFormUpdate from "@/src/app/components/form/EntryFormUpdate";
+import { useRouter } from "next/navigation";
 
 type PageProps = {
-  params: Promise<{ id: string[] }>; // params is a Promise now
+  params: Promise<{ id: string[] }>;
 };
-
 export default function DynamicDashboardPage({ params }: PageProps) {
-  // Use React.use() to unwrap the params promise
-  const resolvedParams = use(params); // This will resolve the promise
-  const pathSegments = resolvedParams.id; // Now pathSegments is directly accessible
-
-  const [entry, setEntry] = useState<InsertEntry>({} as InsertEntry);
+  const router = useRouter();
+  const resolvedParams = use(params);
+  const pathSegments = resolvedParams.id;
+  const [entry, setEntry] = useState<SelectEntry | null>(null);
 
   const isCreatePage =
     pathSegments.length === 1 && pathSegments[0] === "create";
@@ -42,8 +41,7 @@ export default function DynamicDashboardPage({ params }: PageProps) {
 
   const handleDeleteClick = async (id: number) => {
     await deleteEntry(id);
-    // Optionally, redirect after deletion
-    window.location.href = "/dashboard"; // Or use Next.js's useRouter for client-side navigation
+    router.push("/dashboard"); // Uncomment if using useRouter
   };
 
   if (isCreatePage) {
@@ -64,7 +62,7 @@ export default function DynamicDashboardPage({ params }: PageProps) {
   }
 
   if (isDetailPage) {
-    if (!entry.title) return <p>Loading...</p>; // Check if entry is loaded
+    if (!entry) return <p>Loading...</p>;
     return (
       <section className="flex justify-center py-14">
         <div className="w-10/12 px-10 py-12 flex flex-col gap-4 border border-black rounded-xl">

@@ -1,10 +1,8 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { db } from "@/src/db";
-import { entries, SelectEntry } from "@/src/db/schema";
+import { SelectEntry } from "@/src/db/schema";
 import { createClient } from "@/src/lib/supabase/server";
-import { eq } from "drizzle-orm";
 
 export const addEntry = async (formData: FormData): Promise<void> => {
   const supabase = await createClient();
@@ -47,7 +45,7 @@ export const addEntry = async (formData: FormData): Promise<void> => {
     throw new Error("Missing required form data");
   }
 
-  await db.insert(entries).values({
+  const { data, error } = await supabase.from("entries").insert({
     title,
     category,
     genre,
@@ -66,59 +64,96 @@ export const addEntry = async (formData: FormData): Promise<void> => {
   redirect("/dashboard");
 };
 
-export const getEntries = async (userId: string): Promise<SelectEntry[]> => {
+export const getEntries = async (): Promise<SelectEntry[]> => {
+  const supabase = await createClient();
+
   try {
-    if (!userId) {
-      throw new Error("User sub is required to fetch entries.");
+    const { data, error } = await supabase.from("entries").select("*");
+    if (error) {
+      console.error("Error fetching entries with RLS:", error);
+      throw error;
     }
-    const result = await db
-      .select()
-      .from(entries)
-      .where(eq(entries.user_id, userId));
-    return result;
+    return (data || []) as SelectEntry[];
   } catch (error) {
     console.error("Error fetching entries:", error);
     return [];
   }
 };
 
-export const getEntry = async (id: number): Promise<SelectEntry> => {
-  const result = await db.select().from(entries).where(eq(entries.id, id));
-  const entry = result[0];
-  return entry;
+export const getEntry = async (id: number): Promise<SelectEntry | null> => {
+  const supabase = await createClient();
+  try {
+    const { data, error } = await supabase
+      .from("entries")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+    if (!data) {
+      return null;
+    }
+
+    return data as SelectEntry;
+  } catch (error) {
+    console.error("Error fetching single entry:", error);
+    return null;
+  }
 };
 
-export const getUpdateEntry = async (entryId: number): Promise<SelectEntry> => {
-  const result = await db.select().from(entries).where(eq(entries.id, entryId));
+export const getUpdateEntry = async (
+  entryId: number
+): Promise<SelectEntry | null> => {
+  const supabase = await createClient();
 
-  const entry = result[0];
+  try {
+    const { data, error } = await supabase
+      .from("entries")
+      .select("*")
+      .eq("id", entryId)
+      .single();
 
-  console.log("getUpdateEntry result:", entry);
+    if (error && error.code !== "PGRST116") {
+      console.error("Error fetching entry for update with RLS:", error);
+      throw error;
+    }
 
-  return {
-    id: entry.id,
-    title: entry.title,
-    category: entry.category,
-    genre: entry.genre,
-    year: entry.year,
-    description: entry.description,
-    author: entry.author,
-    director: entry.director,
-    writer: entry.writer,
-    publisher: entry.publisher,
-    developer: entry.developer,
-    month: entry.month,
-    rating: entry.rating,
-    createdAt: entry.createdAt ? new Date(entry.createdAt) : new Date(),
-    updatedAt: entry.updatedAt ? new Date(entry.updatedAt) : new Date(),
-    user_id: entry.user_id,
-  };
+    if (!data) {
+      console.log("No entry found for update or RLS blocked access:", entryId);
+      return null;
+    }
+
+    console.log("getUpdateEntry result:", data);
+
+    return {
+      id: data.id,
+      title: data.title,
+      category: data.category,
+      genre: data.genre,
+      year: data.year,
+      description: data.description,
+      author: data.author,
+      director: data.director,
+      writer: data.writer,
+      publisher: data.publisher,
+      developer: data.developer,
+      month: data.month,
+      rating: data.rating,
+      createdAt: data.createdAt ? new Date(data.createdAt) : new Date(),
+      updatedAt: data.updatedAt ? new Date(data.updatedAt) : new Date(),
+      user_id: data.user_id,
+    };
+  } catch (error) {
+    console.error("Error fetching entry for update:", error);
+    return null;
+  }
 };
 
 export const updateEntry = async (
   id: number,
   formData: FormData
 ): Promise<void> => {
+  const supabase = await createClient();
+
   const title = formData.get("title")?.toString() || null;
   const category = formData.get("category")?.toString() || null;
   const genre = formData.get("genre")?.toString() || null;
@@ -147,9 +182,9 @@ export const updateEntry = async (
     throw new Error("Missing required form data");
   }
 
-  await db
-    .update(entries)
-    .set({
+  const { error } = await supabase
+    .from("entries")
+    .update({
       title,
       category,
       genre,
@@ -163,11 +198,23 @@ export const updateEntry = async (
       developer,
       rating,
     })
-    .where(eq(entries.id, id));
+    .eq("id", id);
+
+  if (error) {
+    console.error("Error updating entry with RLS:", error);
+    throw new Error("Failed to update entry.");
+  }
+
   redirect("/dashboard");
 };
 
 export const deleteEntry = async (id: number): Promise<void> => {
-  await db.delete(entries).where(eq(entries.id, id));
+  const supabase = await createClient();
+  const { error } = await supabase.from("entries").delete().eq("id", id);
+  if (error) {
+    console.error("Error deleting entry with RLS:", error);
+    throw new Error("Failed to delete entry.");
+  }
+
   redirect("/dashboard");
 };

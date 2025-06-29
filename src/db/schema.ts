@@ -1,4 +1,11 @@
-import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  integer,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  uuid,
+} from "drizzle-orm/pg-core";
 
 export const entries = pgTable("entries", {
   id: serial("id").primaryKey(),
@@ -19,7 +26,7 @@ export const entries = pgTable("entries", {
   writer: text("writer"),
   publisher: text("publisher"),
   developer: text("developer"),
-  user_id: text("user_id").notNull(),
+  user_id: uuid("user_id").notNull(),
 });
 
 export type InsertEntry = typeof entries.$inferInsert;

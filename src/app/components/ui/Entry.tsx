@@ -22,8 +22,8 @@ function Entry({
 }: SelectEntry) {
   return (
     <Link href={`dashboard/${id}`}>
-      <div className="min-w-96 max-w-lg py-8 px-10 flex flex-col gap-4 hover:bg-gray-200 justify-between border border-black rounded-xl">
-        <div className="flex items-center justify-between mb-4">
+      <div className="min-w-96 max-w-lg py-8 px-8 flex flex-col gap-4 hover:bg-purple-100 justify-between bg-gray-200 rounded-xl">
+        <div className="flex items-center justify-between">
           <h1 className="text-4xl">{title}</h1>
           <ArrowOutwardIcon className="w-8 h-8" />
         </div>

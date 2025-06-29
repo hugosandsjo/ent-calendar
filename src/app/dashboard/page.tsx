@@ -35,7 +35,7 @@ export default async function Dashboard() {
     return <div>Please log in to see your entries.</div>;
   }
 
-  const data = await getEntries(user.id);
+  const data = await getEntries();
 
   const entries: SelectEntry[] = data;
 

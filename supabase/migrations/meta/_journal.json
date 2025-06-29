@@ -43,6 +43,13 @@
       "when": 1750924894631,
       "tag": "0005_certain_daimon_hellstrom",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1751111499003,
+      "tag": "0006_loud_miracleman",
+      "breakpoints": true
     }
   ]
 }
