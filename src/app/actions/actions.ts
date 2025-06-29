@@ -45,7 +45,7 @@ export const addEntry = async (formData: FormData): Promise<void> => {
     throw new Error("Missing required form data");
   }
 
-  const { data, error } = await supabase.from("entries").insert({
+  await supabase.from("entries").insert({
     title,
     category,
     genre,
@@ -83,7 +83,7 @@ export const getEntries = async (): Promise<SelectEntry[]> => {
 export const getEntry = async (id: number): Promise<SelectEntry | null> => {
   const supabase = await createClient();
   try {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from("entries")
       .select("*")
       .eq("id", id)
