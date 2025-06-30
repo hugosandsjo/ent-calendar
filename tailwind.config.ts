@@ -11,6 +11,14 @@ export default {
   theme: {
     extend: {
       colors: {
+        brand: {
+          primary: "#3b82f6",
+          secondary: "#1e3a8a",
+          book: "#9FC989",
+          movie: "#F9C74F",
+          series: "#90BE6D",
+          game: "#F3722C",
+        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
