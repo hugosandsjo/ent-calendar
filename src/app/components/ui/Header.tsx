@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-// import LogButton from "@/src/app/components/ui/LogButton";
+import { AuthButton } from "@/src/app/components/auth-button";
 
 function Header() {
   return (
@@ -12,7 +12,7 @@ function Header() {
       <Link href="/dashboard">
         <p className="hover:underline">Dashboard</p>
       </Link>
-      {/* <LogButton /> */}
+      <AuthButton />
 
       <Link href="/dashboard/create">
         <Image

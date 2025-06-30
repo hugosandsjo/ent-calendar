@@ -26,7 +26,7 @@ export default async function Home() {
   // If user exists, show a welcome message and logout button
   return (
     <main className="flex flex-col items-center justify-center min-h-screen">
-      <h1>Welcome, {user.email}!</h1>
+      <h1 className="text-5xl">Welcome, {user.email}!</h1>
       <Link href="/dashboard">
         <button>Go to Dashboard</button>
       </Link>
