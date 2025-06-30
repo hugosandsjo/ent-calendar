@@ -22,7 +22,7 @@ function Entry({
 }: SelectEntry) {
   return (
     <Link href={`dashboard/${id}`}>
-      <div className="min-w-96 max-w-lg py-8 px-8 flex flex-col gap-4 lg:hover:bg-purple-100 justify-between bg-brand-game rounded-xl">
+      <div className="w-[28rem] py-8 px-8 flex flex-col gap-4 lg:hover:bg-purple-100 justify-between bg-brand-game rounded-xl">
         <div className="flex items-center justify-between">
           <h1 className="text-4xl">{title}</h1>
           <ArrowOutwardIcon className="w-8 h-8" />
@@ -43,7 +43,7 @@ function Entry({
             </article>
           </div>
         </div>
-        <p>{description}</p>
+        <p className="line-clamp-4">{description}</p>
       </div>
     </Link>
   );
