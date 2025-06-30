@@ -40,19 +40,20 @@ export default function EntryForm() {
       <article className="flex flex-col">
         <FormInput title="Title" name="title" />
       </article>
-      <article className="flex gap-4">
+      <article className="flex gap-4 flex-wrap">
         <div className="flex flex-col">
           <FormMonth />
         </div>
         <div className="flex flex-col">
           <FormInput title="Year" name="year" />
         </div>
+        <article className="flex gap-4">
+          <div className="flex flex-col">
+            <FormInput title="Genre" name="genre" />
+          </div>
+        </article>
       </article>
-      <article className="flex gap-4">
-        <div className="flex flex-col">
-          <FormInput title="Genre" name="genre" />
-        </div>
-      </article>
+
       <article className="flex gap-4 flex-wrap">
         {/* Conditionally render inputs based on category */}
         {category === "Book" && (

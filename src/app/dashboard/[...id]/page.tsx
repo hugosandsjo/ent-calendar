@@ -46,7 +46,7 @@ export default function DynamicDashboardPage({ params }: PageProps) {
 
   if (isCreatePage) {
     return (
-      <section className="flex flex-col w-screen items-center justify-center mb-12">
+      <section className="flex w-screen px-4 md:px-8 lg:justify-center mb-12">
         <EntryForm />
       </section>
     );
