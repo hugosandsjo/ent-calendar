@@ -12,12 +12,12 @@ export default {
     extend: {
       colors: {
         brand: {
-          primary: "#3b82f6",
+          primary: "#191919",
           secondary: "#1e3a8a",
-          book: "#9FC989",
-          movie: "#F9C74F",
-          series: "#90BE6D",
-          game: "#F3722C",
+          book: "#B0BBB7",
+          movie: "#E4E2EB",
+          series: "#6188F9",
+          game: "#D5D0C8",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

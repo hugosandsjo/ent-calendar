@@ -65,7 +65,7 @@ export default function DynamicDashboardPage({ params }: PageProps) {
     if (!entry) return <p>Loading...</p>;
     return (
       <section className="flex justify-center py-14">
-        <div className="w-10/12 px-10 py-12 flex flex-col gap-4 border border-black rounded-xl">
+        <div className="w-10/12 px-10 py-12 flex flex-col gap-4 bg-brand-movie rounded-xl">
           <div className="flex justify-between flex-col lg:flex-row">
             <Link href="/dashboard" className="hover:opacity-60">
               <ArrowLeftIcon className="w-8 h-8 mb-4" />
@@ -76,20 +76,20 @@ export default function DynamicDashboardPage({ params }: PageProps) {
           {entry ? (
             <div className="flex flex-col gap-2">
               <div className="flex gap-x-2 mb-2 text-1xl flex-wrap gap-y-2">
-                <h2 className="border rounded-3xl py-1 px-2">
+                <h2 className="bg-white rounded-3xl py-1 px-3">
                   {entry.category}
                 </h2>
                 {entry.author ? (
-                  <h2 className="border rounded-3xl py-1 px-2">
+                  <h2 className="bg-white rounded-3xl py-1 px-3">
                     {entry.author}
                   </h2>
                 ) : null}
                 {entry.director ? (
-                  <h2 className="border rounded-3xl py-1 px-2">
+                  <h2 className="border border-black bg-white rounded-3xl py-1 px-3">
                     {entry.director}
                   </h2>
                 ) : null}
-                <h2 className="border rounded-3xl py-1 px-2">{entry.year}</h2>
+                <h2 className="rounded-3xl bg-white py-1 px-3">{entry.year}</h2>
               </div>
               <RatingTag rating={entry.rating ?? undefined} />
               <p className="text-lg">{entry.description}</p>
