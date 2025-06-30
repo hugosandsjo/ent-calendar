@@ -13,7 +13,6 @@ export function AuthButton() {
   const supabase = createClient();
 
   useEffect(() => {
-    // Get initial user
     const getUser = async () => {
       const {
         data: { user },
