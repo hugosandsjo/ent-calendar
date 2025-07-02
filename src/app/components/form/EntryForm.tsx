@@ -12,7 +12,6 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createEntrySchema, TCreateEntrySchema } from "@/src/lib/types";
-import { useRouter } from "next/navigation";
 
 export default function EntryForm() {
   const formRef = useRef<HTMLFormElement>(null);
