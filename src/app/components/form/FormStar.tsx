@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
+import { UseFormSetValue, UseFormRegister } from "react-hook-form";
+import { TCreateEntrySchema } from "@/src/lib/types";
 
 type FormStarProps = {
+  register: UseFormRegister<TCreateEntrySchema>;
+  setValue: UseFormSetValue<TCreateEntrySchema>;
   defaultValue?: number | null;
 };
 
-export default function FormStar({ defaultValue }: FormStarProps) {
+export default function FormStar({
+  register,
+  defaultValue,
+  setValue,
+}: FormStarProps) {
   const [rating, setRating] = useState<number | null>(defaultValue || null);
   const [hover, setHover] = useState<number | null>(null);
 
@@ -13,6 +21,10 @@ export default function FormStar({ defaultValue }: FormStarProps) {
   useEffect(() => {
     setRating(defaultValue || null);
   }, [defaultValue]);
+
+  const { onChange, ...registerProps } = register("rating", {
+    valueAsNumber: true, // This converts the string to number
+  });
 
   return (
     <>
@@ -24,11 +36,15 @@ export default function FormStar({ defaultValue }: FormStarProps) {
             <label key={currentRating}>
               <input
                 type="radio"
-                name="rating"
+                // name="rating"
                 value={currentRating}
                 className="hidden"
                 checked={rating === currentRating}
-                onChange={() => setRating(currentRating)}
+                onChange={() => {
+                  setRating(currentRating);
+                  setValue("rating", currentRating);
+                }}
+                {...registerProps}
               />
               <FaStar
                 size={30}

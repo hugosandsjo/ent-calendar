@@ -1,19 +1,28 @@
+import { FieldPath, UseFormRegister } from "react-hook-form";
+import { TCreateEntrySchema } from "@/src/lib/types";
+
 type FormInputProps = {
   title: string;
-  name: string;
+  name: FieldPath<TCreateEntrySchema>;
+  register: UseFormRegister<TCreateEntrySchema>;
   defaultValue?: string;
 };
 
-function FormInputLarge({ title, name, defaultValue }: FormInputProps) {
+function FormInputLarge({
+  title,
+  name,
+  defaultValue,
+  register,
+}: FormInputProps) {
   return (
     <>
       <label htmlFor={title}>{title}</label>
       <textarea
-        className="p-3 border border-black rounded-md h-60 resize-none"
+        className="p-3 border-2 border-black rounded-md h-60 resize-none"
         id={name}
-        name={name}
+        // name={name}
         defaultValue={defaultValue}
-        required
+        {...register(name)}
       ></textarea>
     </>
   );

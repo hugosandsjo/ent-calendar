@@ -3,8 +3,18 @@
 import { redirect } from "next/navigation";
 import { SelectEntry } from "@/src/db/schema";
 import { createClient } from "@/src/lib/supabase/server";
+import { z } from "zod/v4";
+import { createEntrySchema, TCreateEntrySchema } from "@/src/lib/types";
+import { revalidatePath } from "next/cache";
 
-export const addEntry = async (formData: FormData): Promise<void> => {
+type ServerActionResponse =
+  | { success: true }
+  | { success: false; errors: z.ZodFormattedError<TCreateEntrySchema> };
+
+export const addEntry = async (
+  formValues: TCreateEntrySchema
+): Promise<ServerActionResponse> => {
+  console.log("Form values:", formValues);
   const supabase = await createClient();
   const {
     data: { user },
@@ -15,35 +25,29 @@ export const addEntry = async (formData: FormData): Promise<void> => {
     throw new Error("User not authenticated");
   }
 
-  const title = formData.get("title")?.toString() || null;
-  const category = formData.get("category")?.toString() || null;
-  const genre = formData.get("genre")?.toString() || null;
-  const yearStr = formData.get("year")?.toString();
-  const year = yearStr ? parseInt(yearStr, 10) : null;
-  const description = formData.get("description")?.toString() || null;
-  const month = formData.get("month")?.toString() || null;
-  const ratingStr = formData.get("rating")?.toString();
-  const rating = ratingStr ? parseInt(ratingStr, 10) : null;
+  const result = createEntrySchema.safeParse(formValues);
 
-  let author = null;
-  let director = null;
-  let writer = null;
-  let publisher = null;
-  let developer = null;
-
-  if (category === "Book") {
-    author = formData.get("author")?.toString() || null;
-  } else if (category === "Movie" || category === "Series") {
-    director = formData.get("director")?.toString() || null;
-    writer = formData.get("writer")?.toString() || null;
-  } else if (category === "Game") {
-    publisher = formData.get("publisher")?.toString() || null;
-    developer = formData.get("developer")?.toString() || null;
+  if (!result.success) {
+    return {
+      success: false,
+      errors: result.error.format(),
+    };
   }
 
-  if (!title || !category || !genre || !year || !description || !month) {
-    throw new Error("Missing required form data");
-  }
+  const {
+    title,
+    category,
+    genre,
+    year,
+    description,
+    month,
+    rating,
+    author,
+    director,
+    writer,
+    publisher,
+    developer,
+  } = result.data;
 
   await supabase.from("entries").insert({
     title,
@@ -52,12 +56,12 @@ export const addEntry = async (formData: FormData): Promise<void> => {
     year,
     description,
     month,
-    author,
-    director,
-    writer,
-    publisher,
-    developer,
-    rating,
+    author: author ?? null,
+    director: director ?? null,
+    writer: writer ?? null,
+    publisher: publisher ?? null,
+    developer: developer ?? null,
+    rating: rating ?? null,
     user_id: user.id,
   });
 

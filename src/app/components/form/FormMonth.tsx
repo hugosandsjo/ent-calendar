@@ -1,16 +1,21 @@
+import { UseFormRegister } from "react-hook-form";
+import { TCreateEntrySchema } from "@/src/lib/types";
+
 type MonthProps = {
   defaultValue?: string;
+  register: UseFormRegister<TCreateEntrySchema>;
 };
 
-export default function FormMonth({ defaultValue }: MonthProps) {
+export default function FormMonth({ defaultValue, register }: MonthProps) {
   return (
-    <>
+    <div className="flex flex-col">
       <label htmlFor="options">Month</label>
       <select
-        className="py-3.5 px-2 border border-black rounded-md"
+        className="py-3.5 px-2 border-2 border-black rounded-md"
         id="month"
-        name="month"
+        // name="month"
         defaultValue={defaultValue}
+        {...register("month")}
       >
         <option value="january">January</option>
         <option value="february">February</option>
@@ -25,6 +30,6 @@ export default function FormMonth({ defaultValue }: MonthProps) {
         <option value="november">November</option>
         <option value="december">December</option>
       </select>
-    </>
+    </div>
   );
 }
