@@ -15,11 +15,7 @@ import { createEntrySchema, TCreateEntrySchema } from "@/src/lib/types";
 
 export default function EntryForm() {
   const formRef = useRef<HTMLFormElement>(null);
-  const [category, setCategory] = useState<string>("Book");
-
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCategory(e.target.value);
-  };
+  const [selectedCategory, setSelectedCategory] = useState<string>("Book");
 
   const {
     register,
@@ -28,6 +24,9 @@ export default function EntryForm() {
     formState: { errors, isSubmitting },
   } = useForm<TCreateEntrySchema>({
     resolver: zodResolver(createEntrySchema),
+    defaultValues: {
+      category: "Book",
+    },
   });
 
   const onSubmit = async (data: TCreateEntrySchema) => {
@@ -69,8 +68,6 @@ export default function EntryForm() {
           <RadioButton
             key={formCategory}
             category={formCategory}
-            onChange={handleCategoryChange}
-            checked={category === formCategory}
             register={register}
           />
         ))}
@@ -95,18 +92,18 @@ export default function EntryForm() {
 
       <article className="flex gap-4 flex-wrap">
         {/* Conditionally render inputs based on category */}
-        {category === "Book" && (
+        {selectedCategory === "Book" && (
           <FormInput title="Author" name="author" register={register} />
         )}
 
-        {(category === "Movie" || category === "Series") && (
+        {(selectedCategory === "Movie" || selectedCategory === "Series") && (
           <>
             <FormInput title="Director" name="director" register={register} />
             <FormInput title="Writer" name="writer" register={register} />
           </>
         )}
 
-        {category === "Game" && (
+        {selectedCategory === "Game" && (
           <>
             <FormInput title="Publisher" name="publisher" register={register} />
             <FormInput title="Developer" name="developer" register={register} />

@@ -3,16 +3,14 @@ import { TCreateEntrySchema } from "@/src/lib/types";
 
 type RadioButtonProps = {
   category: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  checked: boolean;
   register: UseFormRegister<TCreateEntrySchema>;
+  onCategoryChange?: (category: string) => void;
 };
 
 function RadioButton({
   category,
-  onChange,
-  checked,
   register,
+  onCategoryChange,
 }: RadioButtonProps) {
   const { onChange: registerOnChange, ...registerProps } = register("category");
 
@@ -21,14 +19,14 @@ function RadioButton({
       <input
         type="radio"
         id={category}
-        // name="category"
         value={category}
         className="hidden"
         onChange={(e) => {
-          onChange(e); // Call your custom onChange
-          registerOnChange(e); // Call the form's onChange
+          registerOnChange(e);
+          onCategoryChange?.(e.target.value);
+          console.log(`Category changed to: ${e.target.value}`);
         }}
-        checked={checked}
+        defaultChecked={category === "Book" ? true : false}
         {...registerProps}
       />
       <span className="radio-label py-3 px-5 border-2 border-black rounded-full font-medium hover:bg-black hover:text-white transition-colors duration-300">
