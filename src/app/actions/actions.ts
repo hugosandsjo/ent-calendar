@@ -153,37 +153,43 @@ export const getUpdateEntry = async (
 
 export const updateEntry = async (
   id: number,
-  formData: FormData
-): Promise<void> => {
+  formValues: TCreateEntrySchema
+): Promise<ServerActionResponse> => {
   const supabase = await createClient();
 
-  const title = formData.get("title")?.toString() || null;
-  const category = formData.get("category")?.toString() || null;
-  const genre = formData.get("genre")?.toString() || null;
-  const yearStr = formData.get("year")?.toString();
-  const year = yearStr ? parseInt(yearStr, 10) : null;
-  const description = formData.get("description")?.toString() || null;
-  const month = formData.get("month")?.toString() || null;
-  const ratingStr = formData.get("rating")?.toString();
-  const rating = ratingStr ? parseInt(ratingStr, 10) : null;
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
 
-  let author = null;
-  let director = null;
-  let writer = null;
-  let publisher = null;
-  let developer = null;
-  if (category === "Book") {
-    author = formData.get("author") as string | null;
-  } else if (category === "Movie" || category === "Series") {
-    director = formData.get("director") as string | null;
-    writer = formData.get("writer") as string | null;
-  } else if (category === "Game") {
-    publisher = formData.get("publisher") as string | null;
-    developer = formData.get("developer") as string | null;
+  if (authError || !user) {
+    throw new Error("User not authenticated");
   }
-  if (!title || !category || !genre || !year || !description || !month) {
-    throw new Error("Missing required form data");
+
+  const result = createEntrySchema.safeParse(formValues);
+
+  if (!result.success) {
+    console.error("Server-side validation failed:", result.error.issues);
+    return {
+      success: false,
+      message: "Validation failed. Please check your input.",
+    };
   }
+
+  const {
+    title,
+    category,
+    genre,
+    year,
+    description,
+    month,
+    rating,
+    author,
+    director,
+    writer,
+    publisher,
+    developer,
+  } = result.data;
 
   const { error } = await supabase
     .from("entries")

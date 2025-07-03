@@ -10,12 +10,21 @@ import { SelectEntry } from "@/src/db/schema";
 import FormStar from "@/src/app/components/form/FormStar";
 import { ArrowLeftIcon } from "@/src/app/components/Icons";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { TCreateEntrySchema } from "@/src/lib/types";
 
 export default function EntryFormUpdate({ id }: { id: number }) {
   const formRef = useRef<HTMLFormElement>(null);
-  const [category, setCategory] = useState<string>("Book");
+  const [selectedCategory, setSelectedCategory] = useState<string>("Book");
   const [entry, setEntry] = useState<SelectEntry | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<TCreateEntrySchema>();
 
   useEffect(() => {
     (async () => {
@@ -23,7 +32,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
         setIsLoading(true);
         const data = await getUpdateEntry(id);
         setEntry(data);
-        setCategory(data?.category || "Book");
+        setSelectedCategory(data?.category || "Book");
       } catch (error) {
         console.error("Error fetching entry:", error);
       } finally {
@@ -40,19 +49,12 @@ export default function EntryFormUpdate({ id }: { id: number }) {
     );
   }
 
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCategory(e.target.defaultValue);
-  };
+  const onSubmit = async (data: TCreateEntrySchema) => {
+    const response = await updateEntry(id, data);
 
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(formRef.current!);
-
-    try {
-      await updateEntry(id, formData);
-    } catch (error) {
-      console.error("Error updating entry:", error);
+    if (!response.success) {
+      console.error("Server returned validation errors:", response.message);
+      return;
     }
   };
 
@@ -60,7 +62,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
     <form
       ref={formRef}
       className="flex flex-col p-1 gap-y-2"
-      onSubmit={handleFormSubmit}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <section className="flex">
         <Link href={`/dashboard/${id}`} className="hover:opacity-60">
@@ -73,48 +75,64 @@ export default function EntryFormUpdate({ id }: { id: number }) {
           <RadioButton
             key={formCategory}
             category={formCategory}
-            onChange={handleCategoryChange}
-            checked={category === formCategory}
+            register={register}
           />
         ))}
       </div>
 
       <article className="flex flex-col">
-        <FormInput title="Title" name="title" defaultValue={entry.title} />
+        <FormInput
+          title="Title"
+          name="title"
+          defaultValue={entry.title}
+          register={register}
+        />
       </article>
       <article className="flex gap-4 flex-wrap">
         <div className="flex flex-col">
-          <FormMonth defaultValue={entry.month} />
+          <FormMonth defaultValue={entry.month} register={register} />
         </div>
         <div className="flex flex-col">
-          <FormInput title="Year" name="year" defaultValue={entry.year} />
+          <FormInput
+            title="Year"
+            name="year"
+            defaultValue={entry.year}
+            register={register}
+          />
         </div>
         <article className="flex gap-4">
           <div className="flex flex-col">
-            <FormInput title="Genre" name="genre" defaultValue={entry.genre} />
+            <FormInput
+              title="Genre"
+              name="genre"
+              defaultValue={entry.genre}
+              register={register}
+            />
           </div>
         </article>
       </article>
 
       <article className="flex gap-4 flex-wrap">
         {/* Conditionally render inputs based on category */}
-        {category === "Book" && (
+        {selectedCategory === "Book" && (
           <div className="flex flex-col">
             <FormInput
               title="Author"
               name="author"
               defaultValue={entry.author || ""}
+              register={register}
             />
           </div>
         )}
 
-        {(category === "Movie" || category === "Series") && (
+        {(selectedCategory === "Movie" || selectedCategory === "Series") && (
           <>
             <div className="flex flex-col">
               <FormInput
                 title="Director"
                 name="director"
                 defaultValue={entry.director || ""}
+                register={register}
               />
             </div>
             <div className="flex flex-col">
@@ -122,18 +140,20 @@ export default function EntryFormUpdate({ id }: { id: number }) {
                 title="Writer"
                 name="writer"
                 defaultValue={entry.writer || ""}
+                register={register}
               />
             </div>
           </>
         )}
 
-        {category === "Game" && (
+        {selectedCategory === "Game" && (
           <>
             <div className="flex flex-col">
               <FormInput
                 title="Publisher"
                 name="publisher"
                 defaultValue={entry.publisher || ""}
+                register={register}
               />
             </div>
             <div className="flex flex-col">
@@ -141,16 +161,22 @@ export default function EntryFormUpdate({ id }: { id: number }) {
                 title="Developer"
                 name="developer"
                 defaultValue={entry.developer || ""}
+                register={register}
               />
             </div>
           </>
         )}
       </article>
-      <FormStar defaultValue={entry.rating} />
+      <FormStar
+        defaultValue={entry.rating}
+        register={register}
+        setValue={setValue}
+      />
       <FormInputLarge
         title="Description"
         name="description"
         defaultValue={entry.description}
+        register={register}
       />
 
       <button
