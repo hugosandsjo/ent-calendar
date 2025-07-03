@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import RadioButton from "@/src/app/components/form/RadioButton";
 import { addEntry } from "@/src/app/actions/actions";
 import FormInput from "@/src/app/components/form/FormInput";
