@@ -22,9 +22,7 @@ export default function FormStar({
     setRating(defaultValue || null);
   }, [defaultValue]);
 
-  const { onChange, ...registerProps } = register("rating", {
-    valueAsNumber: true, // This converts the string to number
-  });
+  const { onChange, ...registerProps } = register("rating");
 
   return (
     <>

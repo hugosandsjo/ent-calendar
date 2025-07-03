@@ -59,7 +59,7 @@ export const addEntry = async (
     writer: writer ?? null,
     publisher: publisher ?? null,
     developer: developer ?? null,
-    rating: rating ?? null,
+    rating: rating ? Number(rating) : null,
     user_id: user.id,
   });
 
