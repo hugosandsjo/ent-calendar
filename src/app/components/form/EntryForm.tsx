@@ -15,12 +15,12 @@ import { createEntrySchema, TCreateEntrySchema } from "@/src/lib/types";
 
 export default function EntryForm() {
   const formRef = useRef<HTMLFormElement>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>("Book");
 
   const {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<TCreateEntrySchema>({
     resolver: zodResolver(createEntrySchema),
@@ -28,6 +28,8 @@ export default function EntryForm() {
       category: "Book",
     },
   });
+
+  const selectedCategory = watch("category");
 
   const onSubmit = async (data: TCreateEntrySchema) => {
     const response = await addEntry(data);
