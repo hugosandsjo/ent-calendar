@@ -3,7 +3,6 @@
 import { redirect } from "next/navigation";
 import { SelectEntry } from "@/src/db/schema";
 import { createClient } from "@/src/lib/supabase/server";
-import { z } from "zod/v4";
 import { createEntrySchema, TCreateEntrySchema } from "@/src/lib/types";
 
 type ServerActionResponse =

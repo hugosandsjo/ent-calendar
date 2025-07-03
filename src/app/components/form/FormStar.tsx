@@ -36,7 +36,6 @@ export default function FormStar({
             <label key={currentRating}>
               <input
                 type="radio"
-                // name="rating"
                 value={currentRating}
                 className="hidden"
                 checked={rating === currentRating}

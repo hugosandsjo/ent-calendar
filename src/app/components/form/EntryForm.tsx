@@ -121,10 +121,12 @@ export default function EntryForm() {
       />
       <button
         type="submit"
-        className="mt-4 p-4 border border-black rounded-md bg-black text-white hover:opacity-60"
+        className={`mt-4 p-4 border border-black rounded-md bg-black text-white hover:opacity-60 ${
+          isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+        }`}
         disabled={isSubmitting}
       >
-        Submit
+        Update
       </button>
     </form>
   );

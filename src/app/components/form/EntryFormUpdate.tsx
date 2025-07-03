@@ -64,6 +64,18 @@ export default function EntryFormUpdate({ id }: { id: number }) {
       className="flex flex-col p-1 gap-y-2"
       onSubmit={handleSubmit(onSubmit)}
     >
+      {Object.entries(errors).length > 0 && (
+        <div className="text-red-500 mt-2 p-4 border border-red-300 bg-red-50 rounded">
+          <p className="font-semibold mb-2">Please fix the following:</p>
+          <ul className="list-disc list-inside space-y-1">
+            {Object.entries(errors).map(([field, error]) => (
+              <li key={field} className="text-sm">
+                <strong>{field}:</strong> {error?.message || "Invalid value"}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <section className="flex">
         <Link href={`/dashboard/${id}`} className="hover:opacity-60">
           <ArrowLeftIcon className="w-8 h-8" />
@@ -181,7 +193,10 @@ export default function EntryFormUpdate({ id }: { id: number }) {
 
       <button
         type="submit"
-        className="mt-4 p-4 border border-black rounded-md bg-black text-white hover:opacity-60"
+        className={`mt-4 p-4 border border-black rounded-md bg-black text-white hover:opacity-60 ${
+          isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+        }`}
+        disabled={isSubmitting}
       >
         Update
       </button>
