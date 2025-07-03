@@ -8,12 +8,11 @@ import { createEntrySchema, TCreateEntrySchema } from "@/src/lib/types";
 
 type ServerActionResponse =
   | { success: true }
-  | { success: false; errors: z.ZodFormattedError<TCreateEntrySchema> };
+  | { success: false; message: string };
 
 export const addEntry = async (
   formValues: TCreateEntrySchema
 ): Promise<ServerActionResponse> => {
-  console.log("Form values:", formValues);
   const supabase = await createClient();
   const {
     data: { user },
@@ -27,9 +26,10 @@ export const addEntry = async (
   const result = createEntrySchema.safeParse(formValues);
 
   if (!result.success) {
+    console.error("Server-side validation failed:", result.error.issues);
     return {
       success: false,
-      errors: result.error.format(),
+      message: "Validation failed. Please check your input.",
     };
   }
 

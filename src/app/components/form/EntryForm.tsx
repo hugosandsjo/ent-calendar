@@ -31,15 +31,12 @@ export default function EntryForm() {
   });
 
   const onSubmit = async (data: TCreateEntrySchema) => {
-    console.log("Client-side data going to server:", data);
     const response = await addEntry(data);
 
     if (!response.success) {
-      console.error("Server returned validation errors:", response.errors);
+      console.error("Server returned validation errors:", response.message);
       return;
     }
-    console.log("Server response:", response);
-    console.log("Entry successfully added!");
   };
 
   return (
@@ -50,7 +47,7 @@ export default function EntryForm() {
     >
       {Object.entries(errors).length > 0 && (
         <div className="text-red-500 mt-2 p-4 border border-red-300 bg-red-50 rounded">
-          <p className="font-semibold mb-2">Please fix the following errors:</p>
+          <p className="font-semibold mb-2">Please fix the following:</p>
           <ul className="list-disc list-inside space-y-1">
             {Object.entries(errors).map(([field, error]) => (
               <li key={field} className="text-sm">
@@ -91,6 +88,9 @@ export default function EntryForm() {
         <article className="flex gap-4">
           <FormInput title="Genre" name="genre" register={register} />
         </article>
+        {errors.genre && (
+          <p className="text-red-500 text-sm">{errors.genre.message}</p>
+        )}
       </article>
 
       <article className="flex gap-4 flex-wrap">
@@ -114,6 +114,9 @@ export default function EntryForm() {
         )}
       </article>
       <FormStar setValue={setValue} register={register} />
+      {errors.rating && (
+        <p className="text-red-500 text-sm">{errors.rating.message}</p>
+      )}
       <FormInputLarge
         title="Description"
         name="description"
