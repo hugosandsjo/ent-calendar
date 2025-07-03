@@ -22,6 +22,7 @@ export default function FormStar({
     setRating(defaultValue || null);
   }, [defaultValue]);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { onChange, ...registerProps } = register("rating");
 
   return (
