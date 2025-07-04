@@ -50,17 +50,18 @@ export default async function Dashboard() {
   return (
     <main className="p-10 flex flex-col gap-10">
       <p>Welcome to your dashboard, {user.email}!</p>
-
       {uniqueMonths.map((month) => (
-        <div key={month}>
-          <h1 className="text-4xl mb-8">{capitalizeFirstLetter(month)}</h1>
+        <section key={month}>
+          <div className="flex gap-2 justify-between">
+            <h1 className="text-4xl mb-8">{capitalizeFirstLetter(month)}</h1>
+          </div>
           <EntrySlider
             month={month}
             entries={entries.filter(
               (entry) => entry.month.toLowerCase() === month
             )}
           />
-        </div>
+        </section>
       ))}
     </main>
   );
