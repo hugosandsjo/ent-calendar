@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Entry from "@/src/app/components/ui/Entry";
 import { SelectEntry } from "@/src/db/schema";
 import { ArrowLeftIcon } from "@/src/app/components/Icons";
+import { capitalizeFirstLetter } from "@/src/lib/utils";
 
 type EntrySliderProps = {
   month: string;
@@ -44,24 +45,27 @@ function EntrySlider({ month, entries }: EntrySliderProps) {
   };
 
   return (
-    <section className="relative -left-10">
-      <div className="flex gap-2">
-        <button
-          className="flex justify-center items-center hover:opacity-60 border-2 border-black rounded-full px-2 py-2"
-          onClick={scrollToPreviousSnapPoint}
-        >
-          <ArrowLeftIcon className="w-6 h-6" />
-        </button>
+    <section className="relative">
+      <div className="flex gap-2 justify-between ">
+        <h1 className="text-4xl mb-8">{capitalizeFirstLetter(month)}</h1>
+        <div className="flex gap-2 items-center">
+          <button
+            className="flex justify-center items-center hover:opacity-60 border-2 border-black rounded-full px-2 py-2"
+            onClick={scrollToPreviousSnapPoint}
+          >
+            <ArrowLeftIcon className="w-6 h-6" />
+          </button>
 
-        <button
-          className="flex justify-center items-center hover:opacity-60 border-2 border-black rounded-full px-2 py-2"
-          onClick={scrollToNextSnapPoint}
-        >
-          <ArrowLeftIcon className="w-6 h-6 rotate-180" />
-        </button>
+          <button
+            className="flex justify-center items-center hover:opacity-60 border-2 border-black rounded-full px-2 py-2"
+            onClick={scrollToNextSnapPoint}
+          >
+            <ArrowLeftIcon className="w-6 h-6 rotate-180" />
+          </button>
+        </div>
       </div>
       <div
-        className="flex w-[calc(100%+6rem)] gap-6 overflow-x-auto first:pl-10 last:pr-10"
+        className="flex w-[calc(100%+6rem)] gap-6 overflow-x-auto first:pl-10 last:pr-10 scrollbar-none"
         ref={scrollContainerRef}
       >
         {filteredEntries.map((entry) => (

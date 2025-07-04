@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { getEntries } from "@/src/app/actions/actions";
 import EntrySlider from "@/src/app/components/ui/EntrySlider";
 import { SelectEntry } from "@/src/db/schema";
-import { capitalizeFirstLetter } from "@/src/lib/utils";
 
 export default async function Dashboard() {
   const supabase = await createClient();
@@ -52,9 +51,6 @@ export default async function Dashboard() {
       <p>Welcome to your dashboard, {user.email}!</p>
       {uniqueMonths.map((month) => (
         <section key={month}>
-          <div className="flex gap-2 justify-between">
-            <h1 className="text-4xl mb-8">{capitalizeFirstLetter(month)}</h1>
-          </div>
           <EntrySlider
             month={month}
             entries={entries.filter(
