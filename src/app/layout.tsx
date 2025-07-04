@@ -3,6 +3,8 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import Header from "@/src/app/components/ui/Header";
 import Footer from "@/src/app/components/ui/Footer";
+import FullScreenMenu from "@/src/app/components/ui/FullScreenMenu";
+import { MenuProvider } from "@/src/contexts/MenuContext";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -28,9 +30,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.className} antialiased`}>
-        <Header />
-        {children}
-        <Footer />
+        <MenuProvider>
+          <Header />
+          {children}
+          <Footer />
+          <FullScreenMenu />
+        </MenuProvider>
       </body>
     </html>
   );
