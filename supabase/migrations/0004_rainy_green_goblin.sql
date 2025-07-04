@@ -1,0 +1,1 @@
+ALTER TABLE "entries" ALTER COLUMN "month" DROP NOT NULL;

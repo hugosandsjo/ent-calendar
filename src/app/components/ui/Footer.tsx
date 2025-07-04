@@ -7,7 +7,6 @@ function Footer() {
     <header>
       <div className="flex justify-evenly p-12">
         <Link href="/">
-          {" "}
           <FooterButton text="Home" />
         </Link>
         <Link href="/about">

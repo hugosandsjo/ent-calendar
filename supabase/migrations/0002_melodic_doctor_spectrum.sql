@@ -1,0 +1,1 @@
+ALTER TABLE "entries" RENAME COLUMN "mont" TO "month";

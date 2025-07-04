@@ -1,37 +1,10 @@
 import React from "react";
 import InfoTag from "@/src/app/components/ui/InfoTag";
-import { deleteEntry } from "@/src/app/actions/actions";
 import GenreTag from "@/src/app/components/ui/GenreTag";
 import Link from "next/link";
 import RatingTag from "@/src/app/components/form/RatingTag";
-
-export type EntryProps = {
-  id: number;
-  title: string;
-  category: "Book" | "Movie" | "Series" | "Game";
-  genre: string;
-  year: number | string;
-  description: string;
-  month: string;
-  author?: string;
-  director?: string;
-  writer?: string;
-  publisher?: string;
-  developer?: string;
-  rating?: number | undefined;
-  onDelete: (id: number) => void;
-  onUpdate: (id: number) => void;
-};
-
-export type EntryData = Omit<EntryProps, "onDelete" | "onUpdate">;
-
-const handleDeleteClick = async (
-  id: number,
-  onDelete: (id: number) => void
-) => {
-  await deleteEntry(id);
-  onDelete(id);
-};
+import { SelectEntry } from "@/src/db/schema";
+import { ArrowOutwardIcon } from "@/src/app/components/Icons";
 
 function Entry({
   id,
@@ -46,50 +19,33 @@ function Entry({
   publisher,
   developer,
   rating,
-  onDelete,
-}: EntryProps) {
+}: SelectEntry) {
   return (
-    <div className="min-w-96 max-w-lg py-9 px-12 flex flex-col gap-4 justify-between border border-black">
-      <div>
-        <h1 className="text-4xl mb-3">{title}</h1>
-
+    <Link href={`dashboard/${id}`}>
+      <div className="w-[28rem] py-8 px-8 flex flex-col gap-3 md:hover:bg-purple-100 justify-between bg-brand-game rounded-xl">
+        <div className="flex items-center justify-between">
+          <h1 className="text-4xl">{title}</h1>
+          <ArrowOutwardIcon className="w-8 h-8" />
+        </div>
         <div className="flex flex-col gap-2">
-          <article className="flex flex-wrap gap-x-1">
+          <div className="flex flex-wrap gap-x-1.5 gap-y-2.5">
             <InfoTag text={category} />
             <InfoTag text={year} />
-            <InfoTag text={author} />
-            <InfoTag text={director} />
-            <InfoTag text={writer} />
-            <InfoTag text={developer} />
-            <InfoTag text={publisher} />
-            <RatingTag rating={rating} />
-          </article>
-          <article className="flex">
-            <GenreTag text={genre} />
-          </article>
+            {[author, director, writer, developer, publisher].map(
+              (text, index) =>
+                text ? <InfoTag key={index} text={text} /> : null
+            )}
+          </div>
+          <div className="flex flex-col gap-4">
+            <RatingTag rating={rating || undefined} />
+            <article className="flex">
+              <GenreTag text={genre} />
+            </article>
+          </div>
         </div>
+        <p className="line-clamp-3">{description}</p>
       </div>
-      <div>
-        <p>{description}</p>
-      </div>
-      <div className="flex gap-2 justify-between">
-        <div className="flex gap-x-2">
-          <button
-            className="border hover:bg-red-500 py-2 px-4 rounded-xl"
-            onClick={() => handleDeleteClick(id, onDelete)}
-          >
-            Delete
-          </button>
-        </div>
-        <div className="flex">
-          <Link href={`dashboard/${id}`}>
-            <button className="border hover:bg-green-700 py-2 px-4 rounded-xl">
-              Go to entry
-            </button>
-          </Link>
-        </div>
-      </div>
-    </div>
+    </Link>
   );
 }
 
