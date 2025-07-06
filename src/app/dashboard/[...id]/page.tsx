@@ -1,20 +1,30 @@
-"use client";
-
-import { useEffect, useState, use } from "react"; // Import 'use' from React
+// import { useEffect, useState, use } from "react";
 import { getEntry } from "@/src/app/actions/actions";
 import Link from "next/link";
-import { SelectEntry } from "@/src/db/schema";
 import EntryForm from "@/src/app/components/form/EntryForm";
 import EntryFormUpdate from "@/src/app/components/form/EntryFormUpdate";
 import DetailPage from "@/src/app/components/ui/DetailPage";
+import { createClient } from "@/src/lib/supabase/server";
+import { redirect } from "next/navigation";
 
 type PageProps = {
   params: Promise<{ id: string[] }>;
 };
-export default function DynamicDashboardPage({ params }: PageProps) {
-  const resolvedParams = use(params);
+export default async function DynamicDashboardPage({ params }: PageProps) {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/auth/login");
+  }
+
+  const resolvedParams = await params;
   const pathSegments = resolvedParams.id;
-  const [entry, setEntry] = useState<SelectEntry | null>(null);
+  // const [entry, setEntry] = useState<SelectEntry | null>(null);
+  // const entry = await getEntry(id))
 
   const isCreatePage =
     pathSegments.length === 1 && pathSegments[0] === "create";
@@ -24,16 +34,6 @@ export default function DynamicDashboardPage({ params }: PageProps) {
 
   const entryId =
     isDetailPage || isEditPage ? Number(pathSegments[0]) : undefined;
-
-  useEffect(() => {
-    if (entryId && (isDetailPage || isEditPage)) {
-      const fetchEntry = async () => {
-        const data = await getEntry(entryId);
-        setEntry(data);
-      };
-      fetchEntry();
-    }
-  }, [entryId, isDetailPage, isEditPage]);
 
   if (isCreatePage) {
     return (
@@ -52,8 +52,10 @@ export default function DynamicDashboardPage({ params }: PageProps) {
     );
   }
 
-  if (isDetailPage) {
+  if (entryId && isDetailPage) {
+    const entry = await getEntry(entryId);
     if (!entry) return <p>Loading...</p>;
+
     return (
       <section className="flex justify-center px-4 md:px-20 py-36">
         <DetailPage entry={entry} entryId={entryId} />
