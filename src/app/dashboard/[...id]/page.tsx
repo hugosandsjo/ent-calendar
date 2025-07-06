@@ -1,4 +1,3 @@
-// import { useEffect, useState, use } from "react";
 import { getEntry } from "@/src/app/actions/actions";
 import Link from "next/link";
 import EntryForm from "@/src/app/components/form/EntryForm";
@@ -23,8 +22,6 @@ export default async function DynamicDashboardPage({ params }: PageProps) {
 
   const resolvedParams = await params;
   const pathSegments = resolvedParams.id;
-  // const [entry, setEntry] = useState<SelectEntry | null>(null);
-  // const entry = await getEntry(id))
 
   const isCreatePage =
     pathSegments.length === 1 && pathSegments[0] === "create";
