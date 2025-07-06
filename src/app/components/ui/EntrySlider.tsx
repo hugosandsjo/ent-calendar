@@ -54,7 +54,7 @@ function EntrySlider({ month, entries }: EntrySliderProps) {
         </div>
       </div>
       <div
-        className="flex w-[calc(100%+6rem)] gap-6 overflow-x-auto first:pl-10 last:pr-10 scrollbar-none"
+        className="flex w-screen gap-6 -ml-10 overflow-x-auto pl-10 pr-10 scrollbar-none"
         ref={scrollContainerRef}
       >
         {filteredEntries.map((entry, index) => (
