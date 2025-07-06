@@ -1,8 +1,10 @@
+"use client";
+
 import { SelectEntry } from "@/src/db/schema";
 import Link from "next/link";
 import { ArrowLeftIcon, TrashIcon, EditIcon } from "@/src/app/components/Icons";
 import RatingTag from "@/src/app/components/form/RatingTag";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { deleteEntry } from "@/src/app/actions/actions";
 
 type DetailPageProps = {
@@ -11,11 +13,11 @@ type DetailPageProps = {
 };
 
 export default function DetailPage({ entry, entryId }: DetailPageProps) {
-  //   const router = useRouter();
-  //   const handleDeleteClick = async (id: number) => {
-  //     await deleteEntry(id);
-  //     router.push("/dashboard"); // Uncomment if using useRouter
-  //   };
+  const router = useRouter();
+  const handleDeleteClick = async (id: number) => {
+    await deleteEntry(id);
+    router.push("/dashboard"); // Uncomment if using useRouter
+  };
 
   return (
     <div className="flex flex-col max-w-[64rem]">
@@ -75,15 +77,12 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
                 </button>
               </Link>
               <div className="flex gap-x-2">
-                {/* <button
+                <button
                   className="hover:bg-red-400 py-2 rounded-xl px-2"
-                  // onClick={() => handleDeleteClick(Number(entryId))}
-                  onClick={() => {
-                    console.log("Delete button clicked for entry ID:");
-                  }}
+                  onClick={() => handleDeleteClick(Number(entryId))}
                 >
                   <TrashIcon className="w-6 h-6 inline-block" />
-                </button> */}
+                </button>
               </div>
             </div>
           </div>
