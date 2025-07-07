@@ -1,14 +1,16 @@
-// type DashboardBrickProps = {
-//   // Define any props if needed in the future
-// };
+type DashboardBrickProps = {
+  title: string;
+  stat: string | number | undefined;
+  className?: string;
+};
 
-export default function DashboardBrick() {
+export default function DashboardBrick({ title, stat }: DashboardBrickProps) {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-4">
-      <div className="mt-6">
-        {/* Placeholder for future dashboard content */}
-        <p className="text-gray-500">Content will be added here soon.</p>
-      </div>
+    <div
+      className={`flex rounded-xl flex-col col-span-6 bg-gray-200 items-center justify-center py-8 w-full h-full px-4`}
+    >
+      <h3>{title}</h3>
+      <h4 className="text-4xl">{stat}</h4>
     </div>
   );
 }
