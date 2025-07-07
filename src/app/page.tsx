@@ -27,15 +27,15 @@ export default async function Home() {
   // If user exists, show a welcome message and logout button
   return (
     <main className="flex flex-col items-center min-h-screen text-brand-foreground mt-10 lg:mt-40">
-      <div className="relative w-full h-96">
+      {/* <div className="relative w-full h-96">
         <Image
           src={"/diary_ent.png"}
           alt={"diary"}
           fill
           className="object-contain"
         />
-      </div>
-      <section className="flex flex-col px-10 gap-4 justify-center">
+      </div> */}
+      <section className="flex flex-col px-4 md:px-10 gap-4 justify-center">
         <h1 className="text-3xl">Welcome, {user.email}!</h1>
         <Link href="/dashboard">
           <button>Go to Dashboard</button>
