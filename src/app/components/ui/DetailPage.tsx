@@ -27,7 +27,7 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
             <ArrowLeftIcon className="w-8 h-8" />
           </Link>
         </div>
-        <div className="flex gap-2">
+        {/* <div className="flex gap-2">
           <Link href="/dashboard" className="hover:opacity-60">
             <div className="flex justify-center items-center hover:opacity-60 border-2 border-black rounded-full px-2 py-2">
               <ArrowLeftIcon className="w-6 h-6" />
@@ -38,7 +38,7 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
               <ArrowLeftIcon className="w-6 h-6 rotate-180" />
             </div>
           </Link>
-        </div>
+        </div> */}
       </div>
       <div className="px-10 py-8 md:py-12 flex flex-col gap-4 bg-brand-movie rounded-xl">
         <div className="flex flex-col lg:flex-row ">

@@ -48,7 +48,9 @@ export default async function Dashboard() {
 
   return (
     <main className="relative flex flex-col gap-10 overflow-x-hidden">
-      <p>Welcome to your dashboard, {user.email}!</p>
+      <div className="px-4">
+        <p>Welcome to your dashboard, {user.email}!</p>
+      </div>
       {uniqueMonths.map((month) => (
         <section key={month}>
           <EntrySlider
