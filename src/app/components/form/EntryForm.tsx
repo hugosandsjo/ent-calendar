@@ -128,7 +128,7 @@ export default function EntryForm() {
         }`}
         disabled={isSubmitting}
       >
-        Update
+        Create
       </button>
     </form>
   );

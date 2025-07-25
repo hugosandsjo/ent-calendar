@@ -22,7 +22,12 @@ export const addEntry = async (
     throw new Error("User not authenticated");
   }
 
-  const result = createEntrySchema.safeParse(formValues);
+  const transformedFormValues = {
+    ...formValues,
+    rating: formValues.rating ? Number(formValues.rating) : undefined,
+  };
+
+  const result = createEntrySchema.safeParse(transformedFormValues);
 
   if (!result.success) {
     console.error("Server-side validation failed:", result.error.issues);
@@ -59,7 +64,7 @@ export const addEntry = async (
     writer: writer ?? null,
     publisher: publisher ?? null,
     developer: developer ?? null,
-    rating: rating ? Number(rating) : null,
+    rating: rating || null,
     user_id: user.id,
   });
 
@@ -165,7 +170,12 @@ export const updateEntry = async (
     throw new Error("User not authenticated");
   }
 
-  const result = createEntrySchema.safeParse(formValues);
+  const transformedValues = {
+    ...formValues,
+    rating: formValues.rating ? Number(formValues.rating) : undefined,
+  };
+
+  const result = createEntrySchema.safeParse(transformedValues);
 
   if (!result.success) {
     console.error("Server-side validation failed:", result.error.issues);
@@ -204,7 +214,7 @@ export const updateEntry = async (
       writer,
       publisher,
       developer,
-      rating,
+      rating: rating ? Number(rating) : null,
     })
     .eq("id", id);
 
