@@ -32,7 +32,10 @@ export default function EntryFormUpdate({ id }: { id: number }) {
         setIsLoading(true);
         const data = await getUpdateEntry(id);
         setEntry(data);
-        setSelectedCategory(data?.category || "Book");
+        if (data?.category) {
+          setSelectedCategory(data.category);
+          setValue("category", data.category); // Set the form value
+        }
       } catch (error) {
         console.error("Error fetching entry:", error);
       } finally {
@@ -88,6 +91,8 @@ export default function EntryFormUpdate({ id }: { id: number }) {
             key={formCategory}
             category={formCategory}
             register={register}
+            selectedCategory={selectedCategory}
+            onCategoryChange={setSelectedCategory}
           />
         ))}
       </div>

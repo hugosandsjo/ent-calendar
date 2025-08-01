@@ -5,12 +5,14 @@ type RadioButtonProps = {
   category: string;
   register: UseFormRegister<TCreateEntrySchema>;
   onCategoryChange?: (category: string) => void;
+  selectedCategory?: string;
 };
 
 function RadioButton({
   category,
   register,
   onCategoryChange,
+  selectedCategory,
 }: RadioButtonProps) {
   const { onChange: registerOnChange, ...registerProps } = register("category");
 
@@ -26,7 +28,7 @@ function RadioButton({
           onCategoryChange?.(e.target.value);
           console.log(`Category changed to: ${e.target.value}`);
         }}
-        defaultChecked={category === "Book" ? true : false}
+        defaultChecked={category === selectedCategory}
         {...registerProps}
       />
       <span className="radio-label py-3 px-5 border-2 border-black rounded-full font-medium hover:bg-black hover:text-white transition-colors duration-300">
