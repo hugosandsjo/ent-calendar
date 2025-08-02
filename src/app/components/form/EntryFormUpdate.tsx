@@ -34,7 +34,7 @@ export default function EntryFormUpdate({ id }: { id: number }) {
         setEntry(data);
         if (data?.category) {
           setSelectedCategory(data.category);
-          setValue("category", data.category); // Set the form value
+          setValue("category", data.category);
         }
       } catch (error) {
         console.error("Error fetching entry:", error);
