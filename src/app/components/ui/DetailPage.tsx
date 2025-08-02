@@ -16,7 +16,7 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
   const router = useRouter();
   const handleDeleteClick = async (id: number) => {
     await deleteEntry(id);
-    router.push("/dashboard"); // Uncomment if using useRouter
+    router.push("/dashboard");
   };
 
   return (
@@ -27,22 +27,10 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
             <ArrowLeftIcon className="w-8 h-8" />
           </Link>
         </div>
-        {/* <div className="flex gap-2">
-          <Link href="/dashboard" className="hover:opacity-60">
-            <div className="flex justify-center items-center hover:opacity-60 border-2 border-black rounded-full px-2 py-2">
-              <ArrowLeftIcon className="w-6 h-6" />
-            </div>
-          </Link>
-          <Link href="/dashboard">
-            <div className="flex justify-center items-center hover:opacity-60 border-2 border-black rounded-full px-2 py-2">
-              <ArrowLeftIcon className="w-6 h-6 rotate-180" />
-            </div>
-          </Link>
-        </div> */}
       </div>
       <div className="px-10 py-8 md:py-12 flex flex-col gap-4 bg-brand-movie rounded-xl">
         <div className="flex flex-col lg:flex-row ">
-          <div className="flex flex-col gap-4 lg:px-10 justify-center ">
+          <div className="flex flex-col gap-4 lg:px-10 justify-center">
             <h1 className="text-5xl leading-tight">{entry.title}</h1>
             {entry ? (
               <div className="flex flex-col gap-4">
@@ -70,7 +58,7 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
             ) : (
               <p>Loading...</p>
             )}
-            <div className="flex gap-2  justify-end">
+            <div className="flex gap-2 justify-end">
               <Link href={`/dashboard/${entryId}/edit`}>
                 <button className="hover:bg-sky-300 py-2 rounded-xl px-2">
                   <EditIcon className="w-6 h-6 inline-block" />
