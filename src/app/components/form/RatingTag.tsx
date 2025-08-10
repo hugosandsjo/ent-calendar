@@ -13,7 +13,7 @@ export default function RatingTag({ rating = 0 }: StarTagProps) {
         <FaStar
           key={index}
           size={24}
-          color={index < rating ? "black" : "grey"}
+          color={index < rating ? "white" : "transparent"}
         />
       ))}
     </div>

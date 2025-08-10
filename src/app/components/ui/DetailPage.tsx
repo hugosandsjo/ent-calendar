@@ -23,7 +23,7 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
   };
 
   return (
-    <div className="flex flex-col max-w-[64rem]">
+    <div className="flex flex-col lg:flex-row max-w-[64rem]">
       {toggleDelete ? (
         <section className="absolute flex items-center justify-center top-0 bottom-0 right-0 left-0">
           <div className="bg-pink-200 flex flex-col gap-4 p-20 relative">
@@ -48,7 +48,7 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
         </section>
       ) : null}
       <div className="flex justify-between mb-4">
-        <div className="flex items-center justify-center">
+        <div className="flex pt-2 px-4 justify-center">
           <Link href="/dashboard" className="hover:opacity-60">
             <ArrowLeftIcon className="w-8 h-8" />
           </Link>
@@ -57,7 +57,9 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
       <div className="px-10 py-8 md:py-12 flex flex-col gap-4 bg-brand-movie rounded-xl">
         <div className="flex flex-col lg:flex-row">
           <div className="flex flex-col gap-4 lg:px-10 justify-center">
-            <h1 className="text-5xl leading-tight">{entry.title}</h1>
+            <h1 className="text-5xl leading-tight tracking-tighter font-karla font-semibold">
+              {entry.title}
+            </h1>
             {entry ? (
               <div className="flex flex-col gap-4">
                 <div className="flex gap-x-2 mb-2 text-1xl flex-wrap gap-y-2">
@@ -79,7 +81,7 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
                   </h2>
                 </div>
                 <RatingTag rating={entry.rating ?? undefined} />
-                <p className="text-lg font-medium">{entry.description}</p>
+                <p className="text-lg font-semibold">{entry.description}</p>
               </div>
             ) : (
               <p>Loading...</p>

@@ -79,12 +79,14 @@ export default function EntryFormUpdate({ id }: { id: number }) {
           </ul>
         </div>
       )}
-      <section className="flex">
-        <Link href={`/dashboard/${id}`} className="hover:opacity-60">
-          <ArrowLeftIcon className="w-8 h-8" />
+      <div className="flex justify-between">
+        <Link href="/dashboard" className="hover:opacity-60">
+          <ArrowLeftIcon className="w-12 h-12" />
         </Link>
-      </section>
-      <h1 className="text-5xl mb-4">Update Entry</h1>
+
+        <h1 className="text-5xl mb-4">Update Entry</h1>
+        <div></div>
+      </div>
       <div className="flex gap-2 my-2 py-2">
         {["Book", "Movie", "Series", "Game"].map((formCategory) => (
           <RadioButton

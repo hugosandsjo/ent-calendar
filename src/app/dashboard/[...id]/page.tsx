@@ -34,7 +34,7 @@ export default async function DynamicDashboardPage({ params }: PageProps) {
 
   if (isCreatePage) {
     return (
-      <section className="flex w-screen px-4 md:px-8 lg:justify-center mb-12">
+      <section className="flex w-screen py-20 px-4 md:px-8 lg:justify-center mb-12">
         <EntryForm />
       </section>
     );
@@ -43,7 +43,7 @@ export default async function DynamicDashboardPage({ params }: PageProps) {
   if (isEditPage) {
     if (!entryId) return <p>Loading...</p>; // Or handle error
     return (
-      <section className="flex w-screen px-4 md:px-8 lg:justify-center mb-12">
+      <section className="flex w-screen px-4 md:px-8 lg:justify-center mb-12 py-20">
         <EntryFormUpdate id={entryId} />
       </section>
     );

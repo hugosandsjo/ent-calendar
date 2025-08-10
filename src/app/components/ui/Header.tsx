@@ -10,14 +10,14 @@ function Header() {
   const { isOpen, toggleMenu } = useMenu();
   return (
     <header
-      className={`relative py-6 px-6 md:px-10 flex justify-between items-center`}
+      className={`relative py-6 px-6 lg:px-32 md:px-10 flex justify-between items-center`}
     >
       <div className={`flex items-center justify-between w-full`}>
         <Link href="/">
           <h1 className="text-4xl hover:opacity-30">ENTcalendar</h1>
         </Link>
         <Link href="/dashboard" className="hidden md:flex">
-          <p className="hover:underline bg-primary text-sm font-medium text-primary-foreground shadow hover:bg-primary/90 px-4 py-2 rounded-md">
+          <p className="border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground px-4 py-2 rounded-md text-sm font-medium">
             Dashboard
           </p>
         </Link>
