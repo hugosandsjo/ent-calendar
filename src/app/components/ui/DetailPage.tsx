@@ -23,7 +23,7 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
   };
 
   return (
-    <div className="flex max-w-[64rem]">
+    <div className="flex flex-col lg:flex-row max-w-[64rem]">
       {toggleDelete ? (
         <section className="absolute flex items-center justify-center top-0 bottom-0 right-0 left-0">
           <div className="bg-pink-200 flex flex-col gap-4 p-20 relative">
