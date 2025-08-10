@@ -22,12 +22,14 @@ function Entry({
 }: SelectEntry) {
   return (
     <Link href={`dashboard/${id}`}>
-      <div className="w-[28rem] py-8 px-8 flex flex-col gap-3 md:hover:bg-purple-100 justify-between bg-brand-game rounded-xl">
+      <div className="w-[28rem] py-9 px-8 flex flex-col gap-4 md:hover:bg-purple-100 justify-between bg-brand-game rounded-xl">
         <div className="flex items-center justify-between">
-          <h1 className="text-4xl">{title}</h1>
+          <h1 className="text-5xl font-karla font-extrabold tracking-tight">
+            {title}
+          </h1>
           <ArrowOutwardIcon className="w-8 h-8" />
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 font-extrabold">
           <div className="flex flex-wrap gap-x-1.5 gap-y-2.5">
             <InfoTag text={category} />
             <InfoTag text={year} />
@@ -36,14 +38,14 @@ function Entry({
                 text ? <InfoTag key={index} text={text} /> : null
             )}
           </div>
+          <RatingTag rating={rating || undefined} />
           <div className="flex flex-col gap-4">
-            <RatingTag rating={rating || undefined} />
             <article className="flex">
               <GenreTag text={genre} />
             </article>
+            <p className="line-clamp-3 font-normal">{description}</p>
           </div>
         </div>
-        <p className="line-clamp-3">{description}</p>
       </div>
     </Link>
   );
