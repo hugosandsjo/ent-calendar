@@ -24,7 +24,7 @@ function Entry({
     <Link href={`dashboard/${id}`}>
       <div className="w-[28rem] py-9 px-8 flex flex-col gap-4 md:hover:bg-purple-100 justify-between bg-brand-game rounded-xl">
         <div className="flex items-center justify-between">
-          <h1 className="text-5xl font-karla font-extrabold tracking-tight">
+          <h1 className="text-5xl font-karla font-extrabold tracking-tighter">
             {title}
           </h1>
           <ArrowOutwardIcon className="w-8 h-8" />
@@ -33,16 +33,14 @@ function Entry({
           <div className="flex flex-wrap gap-x-1.5 gap-y-2.5">
             <InfoTag text={category} />
             <InfoTag text={year} />
+            <InfoTag text={genre} />
             {[author, director, writer, developer, publisher].map(
               (text, index) =>
                 text ? <InfoTag key={index} text={text} /> : null
             )}
           </div>
           <RatingTag rating={rating || undefined} />
-          <div className="flex flex-col gap-4">
-            <article className="flex">
-              <GenreTag text={genre} />
-            </article>
+          <div className="flex flex-col gap-3">
             <p className="line-clamp-3 font-normal">{description}</p>
           </div>
         </div>
