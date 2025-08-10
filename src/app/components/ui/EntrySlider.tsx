@@ -35,7 +35,7 @@ function EntrySlider({ month, entries }: EntrySliderProps) {
 
   return (
     <section className="relative">
-      <div className="flex gap-2 justify-between items-center mb-4">
+      <div className="flex px-4 gap-2 justify-between items-center mb-4">
         <h1 className="text-4xl">{capitalizeFirstLetter(month)}</h1>
         <div className="flex gap-2 items-center">
           <button
@@ -54,7 +54,7 @@ function EntrySlider({ month, entries }: EntrySliderProps) {
         </div>
       </div>
       <div
-        className="flex w-screen gap-6 -ml-10 overflow-x-auto pl-10 pr-10 scrollbar-none"
+        className="flex w-full gap-6 overflow-x-auto px-4 md:px-10 scrollbar-none"
         ref={scrollContainerRef}
       >
         {filteredEntries.map((entry, index) => (

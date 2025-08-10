@@ -9,7 +9,9 @@ import { useMenu } from "@/src/contexts/MenuContext";
 function Header() {
   const { isOpen, toggleMenu } = useMenu();
   return (
-    <header className={`relative h-28 px-10 flex justify-between items-center`}>
+    <header
+      className={`relative py-6 px-6 md:px-10 flex justify-between items-center`}
+    >
       <div className={`flex items-center justify-between w-full`}>
         <Link href="/">
           <h1 className="text-4xl hover:opacity-30">ENTcalendar</h1>

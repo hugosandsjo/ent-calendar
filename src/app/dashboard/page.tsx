@@ -47,8 +47,10 @@ export default async function Dashboard() {
   ).sort((a, b) => monthOrder.indexOf(a) - monthOrder.indexOf(b));
 
   return (
-    <main className="relative p-4 md:p-10 flex flex-col gap-10">
-      <p>Welcome to your dashboard, {user.email}!</p>
+    <main className="relative flex flex-col gap-10 overflow-x-hidden">
+      <div className="px-4">
+        <p>Welcome to your dashboard, {user.email}!</p>
+      </div>
       {uniqueMonths.map((month) => (
         <section key={month}>
           <EntrySlider
