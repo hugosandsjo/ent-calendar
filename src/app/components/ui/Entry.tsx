@@ -1,6 +1,5 @@
 import React from "react";
 import InfoTag from "@/src/app/components/ui/InfoTag";
-import GenreTag from "@/src/app/components/ui/GenreTag";
 import Link from "next/link";
 import RatingTag from "@/src/app/components/form/RatingTag";
 import { SelectEntry } from "@/src/db/schema";
