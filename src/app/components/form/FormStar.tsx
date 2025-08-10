@@ -44,10 +44,20 @@ export default function FormStar({
                 }}
                 {...registerProps}
               />
-              <FaStar
+              {/* <FaStar
                 size={30}
                 color={
                   currentRating <= (hover ?? rating ?? 0) ? "black" : "grey"
+                }
+                onMouseEnter={() => setHover(currentRating)}
+                onMouseLeave={() => setHover(null)}
+              /> */}
+              <FaStar
+                size={30}
+                className={
+                  currentRating <= (hover ?? rating ?? 0)
+                    ? "text-yellow-400"
+                    : "text-gray-300"
                 }
                 onMouseEnter={() => setHover(currentRating)}
                 onMouseLeave={() => setHover(null)}

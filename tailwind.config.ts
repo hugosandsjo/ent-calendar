@@ -18,6 +18,7 @@ export default {
         brand: {
           primary: "#191919",
           secondary: "#1e3a8a",
+          gray: "#E9E9E9",
           book: "#60A16B",
           movie: "#2A5BCF",
           series: "#FF773B",

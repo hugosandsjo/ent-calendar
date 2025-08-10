@@ -81,7 +81,7 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
                   </h2>
                 </div>
                 <RatingTag rating={entry.rating ?? undefined} />
-                <p className="text-lg font-medium">{entry.description}</p>
+                <p className="text-lg font-semibold">{entry.description}</p>
               </div>
             ) : (
               <p>Loading...</p>
