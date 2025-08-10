@@ -17,7 +17,7 @@ function Header() {
           <h1 className="text-4xl hover:opacity-30">ENTcalendar</h1>
         </Link>
         <Link href="/dashboard" className="hidden md:flex">
-          <p className="hover:underline bg-primary text-sm font-medium text-primary-foreground shadow hover:bg-primary/90 px-4 py-2 rounded-md">
+          <p className="border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground px-4 py-2 rounded-md text-sm font-medium">
             Dashboard
           </p>
         </Link>

@@ -62,151 +62,151 @@ export default function EntryFormUpdate({ id }: { id: number }) {
   };
 
   return (
-    <section className="flex gap-2">
-      <div className="flex pt-2">
+    <form
+      ref={formRef}
+      className="flex flex-col p-1 gap-y-2"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      {Object.entries(errors).length > 0 && (
+        <div className="text-red-500 mt-2 p-4 border border-red-300 bg-red-50 rounded">
+          <p className="font-semibold mb-2">Please fix the following:</p>
+          <ul className="list-disc list-inside space-y-1">
+            {Object.entries(errors).map(([field, error]) => (
+              <li key={field} className="text-sm">
+                <strong>{field}:</strong> {error?.message || "Invalid value"}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <div className="flex justify-between">
         <Link href="/dashboard" className="hover:opacity-60">
           <ArrowLeftIcon className="w-12 h-12" />
         </Link>
-      </div>
-      <form
-        ref={formRef}
-        className="flex flex-col p-1 gap-y-2"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        {Object.entries(errors).length > 0 && (
-          <div className="text-red-500 mt-2 p-4 border border-red-300 bg-red-50 rounded">
-            <p className="font-semibold mb-2">Please fix the following:</p>
-            <ul className="list-disc list-inside space-y-1">
-              {Object.entries(errors).map(([field, error]) => (
-                <li key={field} className="text-sm">
-                  <strong>{field}:</strong> {error?.message || "Invalid value"}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        <h1 className="text-5xl mb-4">Update Entry</h1>
-        <div className="flex gap-2 my-2 py-2">
-          {["Book", "Movie", "Series", "Game"].map((formCategory) => (
-            <RadioButton
-              key={formCategory}
-              category={formCategory}
-              register={register}
-              selectedCategory={selectedCategory}
-              onCategoryChange={setSelectedCategory}
-            />
-          ))}
-        </div>
 
-        <article className="flex flex-col">
+        <h1 className="text-5xl mb-4">Update Entry</h1>
+        <div></div>
+      </div>
+      <div className="flex gap-2 my-2 py-2">
+        {["Book", "Movie", "Series", "Game"].map((formCategory) => (
+          <RadioButton
+            key={formCategory}
+            category={formCategory}
+            register={register}
+            selectedCategory={selectedCategory}
+            onCategoryChange={setSelectedCategory}
+          />
+        ))}
+      </div>
+
+      <article className="flex flex-col">
+        <FormInput
+          title="Title"
+          name="title"
+          defaultValue={entry.title}
+          register={register}
+        />
+      </article>
+      <article className="flex gap-4 flex-wrap">
+        <div className="flex flex-col">
+          <FormMonth defaultValue={entry.month} register={register} />
+        </div>
+        <div className="flex flex-col">
           <FormInput
-            title="Title"
-            name="title"
-            defaultValue={entry.title}
+            title="Year"
+            name="year"
+            defaultValue={entry.year}
             register={register}
           />
-        </article>
-        <article className="flex gap-4 flex-wrap">
-          <div className="flex flex-col">
-            <FormMonth defaultValue={entry.month} register={register} />
-          </div>
+        </div>
+        <article className="flex gap-4">
           <div className="flex flex-col">
             <FormInput
-              title="Year"
-              name="year"
-              defaultValue={entry.year}
+              title="Genre"
+              name="genre"
+              defaultValue={entry.genre}
               register={register}
             />
           </div>
-          <article className="flex gap-4">
+        </article>
+      </article>
+
+      <article className="flex gap-4 flex-wrap">
+        {/* Conditionally render inputs based on category */}
+        {selectedCategory === "Book" && (
+          <div className="flex flex-col">
+            <FormInput
+              title="Author"
+              name="author"
+              defaultValue={entry.author || ""}
+              register={register}
+            />
+          </div>
+        )}
+
+        {(selectedCategory === "Movie" || selectedCategory === "Series") && (
+          <>
             <div className="flex flex-col">
               <FormInput
-                title="Genre"
-                name="genre"
-                defaultValue={entry.genre}
+                title="Director"
+                name="director"
+                defaultValue={entry.director || ""}
                 register={register}
               />
             </div>
-          </article>
-        </article>
-
-        <article className="flex gap-4 flex-wrap">
-          {/* Conditionally render inputs based on category */}
-          {selectedCategory === "Book" && (
             <div className="flex flex-col">
               <FormInput
-                title="Author"
-                name="author"
-                defaultValue={entry.author || ""}
+                title="Writer"
+                name="writer"
+                defaultValue={entry.writer || ""}
                 register={register}
               />
             </div>
-          )}
+          </>
+        )}
 
-          {(selectedCategory === "Movie" || selectedCategory === "Series") && (
-            <>
-              <div className="flex flex-col">
-                <FormInput
-                  title="Director"
-                  name="director"
-                  defaultValue={entry.director || ""}
-                  register={register}
-                />
-              </div>
-              <div className="flex flex-col">
-                <FormInput
-                  title="Writer"
-                  name="writer"
-                  defaultValue={entry.writer || ""}
-                  register={register}
-                />
-              </div>
-            </>
-          )}
+        {selectedCategory === "Game" && (
+          <>
+            <div className="flex flex-col">
+              <FormInput
+                title="Publisher"
+                name="publisher"
+                defaultValue={entry.publisher || ""}
+                register={register}
+              />
+            </div>
+            <div className="flex flex-col">
+              <FormInput
+                title="Developer"
+                name="developer"
+                defaultValue={entry.developer || ""}
+                register={register}
+              />
+            </div>
+          </>
+        )}
+      </article>
+      <FormStar
+        defaultValue={entry.rating}
+        register={register}
+        setValue={setValue}
+      />
+      <FormInputLarge
+        title="Description"
+        name="description"
+        defaultValue={entry.description}
+        register={register}
+      />
 
-          {selectedCategory === "Game" && (
-            <>
-              <div className="flex flex-col">
-                <FormInput
-                  title="Publisher"
-                  name="publisher"
-                  defaultValue={entry.publisher || ""}
-                  register={register}
-                />
-              </div>
-              <div className="flex flex-col">
-                <FormInput
-                  title="Developer"
-                  name="developer"
-                  defaultValue={entry.developer || ""}
-                  register={register}
-                />
-              </div>
-            </>
-          )}
-        </article>
-        <FormStar
-          defaultValue={entry.rating}
-          register={register}
-          setValue={setValue}
-        />
-        <FormInputLarge
-          title="Description"
-          name="description"
-          defaultValue={entry.description}
-          register={register}
-        />
-
-        <button
-          type="submit"
-          className={`mt-4 p-4 border border-black rounded-md bg-black text-white hover:opacity-60 ${
-            isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-          disabled={isSubmitting}
-        >
-          Update
-        </button>
-      </form>
-    </section>
+      <button
+        type="submit"
+        className={`mt-4 p-4 border border-black rounded-md bg-black text-white hover:opacity-60 ${
+          isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+        }`}
+        disabled={isSubmitting}
+      >
+        Update
+      </button>
+    </form>
   );
 }
