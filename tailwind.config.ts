@@ -10,6 +10,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        geist: ["var(--font-geist-sans)", "sans-serif"],
+        karla: ["var(--font-karla)", "sans-serif"],
+      },
       colors: {
         brand: {
           primary: "#191919",
@@ -17,7 +21,7 @@ export default {
           book: "#B0BBB7",
           movie: "#E4E2EB",
           series: "#6188F9",
-          game: "#D5D0C8",
+          game: "#E9E9E9",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
