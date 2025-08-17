@@ -36,7 +36,7 @@ function Entry({
         className={`${backgroundClass} w-[28rem] py-9 px-8 flex flex-col gap-4 md:hover:bg-purple-100 justify-between rounded-xl text-white`}
       >
         <div className="flex items-center justify-between">
-          <h1 className="text-5xl font-karla font-extrabold tracking-tighter">
+          <h1 className="md:text-5xl text-4xl font-karla font-extrabold tracking-tighter">
             {title}
           </h1>
           <ArrowOutwardIcon className="w-8 h-8 fill-white" />
