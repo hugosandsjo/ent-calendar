@@ -9,12 +9,12 @@ type DashboardSectionProps = {
 export default function DashboardSection({ user }: DashboardSectionProps) {
   return (
     <section className="flex flex-col px-4 text-center md:px-10 gap-8 justify-center p-8">
-      <div className="flex flex-col gap-4">
-        <h1 className="text-2xl md:text-6xl font-karla font-bold tracking-tight">
+      <div className="flex flex-col gap-8">
+        <h1 className="text-3xl md:text-6xl font-karla font-extrabold tracking-tight text-brand-book">
           Welcome, {user?.email}!
         </h1>
         <Link href="/dashboard">
-          <button className="bg-black p-4 text-white rounded-lg">
+          <button className="bg-brand-game text-brand-primary p-4 rounded-lg">
             Go to Dashboard
           </button>
         </Link>
