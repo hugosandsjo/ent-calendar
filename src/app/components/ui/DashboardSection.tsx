@@ -14,7 +14,7 @@ export default function DashboardSection({ user }: DashboardSectionProps) {
           Welcome, {user?.email}!
         </h1>
         <Link href="/dashboard">
-          <button className="bg-brand-game text-brand-primary p-4 rounded-lg">
+          <button className="bg-brand-black text-white hover:opacity-70 p-4 rounded-lg">
             Go to Dashboard
           </button>
         </Link>

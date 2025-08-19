@@ -23,6 +23,7 @@ export default {
           movie: "#EAF94B",
           series: "#FB6A5A",
           game: "#C3ABFF",
+          black: "#2C2C2C",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

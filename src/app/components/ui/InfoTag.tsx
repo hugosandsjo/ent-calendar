@@ -7,7 +7,7 @@ type InfoTagProps = {
 export default function InfoTag({ text }: InfoTagProps) {
   return (
     <div>
-      <h3 className="text-sm font-semibold border-[1.5px] border-white rounded-3xl px-3 py-1">
+      <h3 className="text-sm font-semibold border-[1.5px] border-brand-black rounded-lg px-3 py-1">
         {text}
       </h3>
     </div>
