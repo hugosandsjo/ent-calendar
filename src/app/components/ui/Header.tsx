@@ -10,7 +10,7 @@ function Header() {
   const { isOpen, toggleMenu } = useMenu();
   return (
     <header
-      className={`relative py-6 px-6 lg:px-32 md:px-10 flex justify-between items-center`}
+      className={`relative py-6 px-6 md:px-10 flex justify-between items-center`}
     >
       <div className={`flex items-center justify-between w-full`}>
         <Link href="/">

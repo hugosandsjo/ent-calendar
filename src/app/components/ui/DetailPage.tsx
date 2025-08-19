@@ -30,13 +30,13 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
             <h1>Are you sure you want to delete this entry?</h1>
             <div className="flex gap-2">
               <button
-                className="border border-black p-6"
+                className="border border-brand-black p-6"
                 onClick={() => handleDeleteEntry(Number(entryId))}
               >
                 Delete
               </button>
               <button
-                className="py-2 px-4 absolute top-5 right-5 bg-black text-white"
+                className="py-2 px-4 absolute top-5 right-5 bg-brand-black text-white"
                 onClick={() => {
                   setToggleDelete(false);
                 }}
@@ -47,16 +47,15 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
           </div>
         </section>
       ) : null}
-      <div className="flex justify-between mb-4">
-        <div className="flex pt-2 px-4 justify-center">
+
+      <div className="px-10 md:px-20 py-8 md:py-12 flex flex-col bg-brand-game rounded-xl text-brand-black">
+        <div className="flex justify-between mb-2">
           <Link href="/dashboard" className="hover:opacity-60">
-            <ArrowLeftIcon className="w-8 h-8" />
+            <ArrowLeftIcon className="w-8 h-8 fill-brand-black" />
           </Link>
         </div>
-      </div>
-      <div className="px-10 py-8 md:py-12 flex flex-col gap-4 bg-brand-movie rounded-xl">
         <div className="flex flex-col lg:flex-row">
-          <div className="flex flex-col gap-4 lg:px-10 justify-center">
+          <div className="flex flex-col gap-4 justify-center">
             <h1 className="text-5xl leading-tight tracking-tighter font-karla font-semibold">
               {entry.title}
             </h1>
@@ -81,7 +80,7 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
                   </h2>
                 </div>
                 <RatingTag rating={entry.rating ?? undefined} />
-                <p className="text-lg font-semibold">{entry.description}</p>
+                <p className="text-md font-semibold">{entry.description}</p>
               </div>
             ) : (
               <p>Loading...</p>

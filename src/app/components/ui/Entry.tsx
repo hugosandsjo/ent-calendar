@@ -33,13 +33,13 @@ function Entry({
   return (
     <Link href={`dashboard/${id}`}>
       <div
-        className={`${backgroundClass} w-[28rem] py-9 px-8 flex flex-col gap-4 md:hover:bg-purple-100 justify-between rounded-xl text-white`}
+        className={`${backgroundClass} w-[28rem] p-7 md:p-8 flex flex-col gap-3 md:gap-4 md:hover:opacity-80 justify-between rounded-xl text-brand-black`}
       >
         <div className="flex items-center justify-between">
-          <h1 className="text-5xl font-karla font-extrabold tracking-tighter">
+          <h1 className="md:text-5xl text-4xl font-karla font-extrabold tracking-tighter">
             {title}
           </h1>
-          <ArrowOutwardIcon className="w-8 h-8 fill-white" />
+          <ArrowOutwardIcon className="w-8 h-8 fill-brand-black" />
         </div>
         <div className="flex flex-col gap-3 font-extrabold">
           <div className="flex flex-wrap gap-x-1.5 gap-y-2.5">
