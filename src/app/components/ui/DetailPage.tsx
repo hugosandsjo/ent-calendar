@@ -54,7 +54,7 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
           </Link>
         </div>
       </div>
-      <div className="px-10 py-8 md:py-12 flex flex-col gap-4 bg-brand-movie rounded-xl">
+      <div className="px-10 py-8 md:py-12 flex flex-col gap-4 bg-brand-game rounded-xl">
         <div className="flex flex-col lg:flex-row">
           <div className="flex flex-col gap-4 lg:px-10 justify-center">
             <h1 className="text-5xl leading-tight tracking-tighter font-karla font-semibold">
