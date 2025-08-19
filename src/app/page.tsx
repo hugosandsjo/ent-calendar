@@ -15,17 +15,21 @@ export default async function Home() {
     return (
       <main className="flex flex-col items-center min-h-screen pt-20">
         <div className="w-full flex text-center font-karla px-4 mb-10">
-          <h1 className="text-5xl font-extrabold leading-[58px] text-brand-book tracking-tight">
+          <h1 className="text-5xl font-extrabold leading-[58px] text-brand-black tracking-tight">
             Keep track of your recently watched films, played games or read
             books.
           </h1>
         </div>
         <div className="flex gap-2">
           <Link href="/auth/sign-up">
-            <button className="bg-brand-game p-4 rounded-md">Sign up</button>
+            <button className="bg-brand-black text-white hover:opacity-80 p-4 rounded-md">
+              Sign up
+            </button>
           </Link>
           <Link href="/auth/login">
-            <button className="bg-brand-movie p-4 rounded-md">Log in</button>
+            <button className="bg-white border p-4 hover:opacity-80 hover:bg-gray-100 rounded-md">
+              Log in
+            </button>
           </Link>
         </div>
       </main>
