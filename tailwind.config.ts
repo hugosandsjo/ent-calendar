@@ -13,6 +13,7 @@ export default {
       fontFamily: {
         geist: ["var(--font-geist-sans)", "sans-serif"],
         karla: ["var(--font-karla)", "sans-serif"],
+        geistMono: ["var(--font-geist-mono)", "sans-serif"],
       },
       colors: {
         brand: {
