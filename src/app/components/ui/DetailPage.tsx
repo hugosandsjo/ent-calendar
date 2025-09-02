@@ -25,21 +25,23 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
   };
   const backgroundClass = categoryBg[entry.category] || categoryBg.default;
   return (
-    /* Delete popup */
     <div className="flex flex-col lg:flex-row max-w-[64rem]">
       {toggleDelete ? (
+        /* Delete popup */
         <section className="absolute flex items-center justify-center top-0 bottom-0 right-0 left-0">
-          <div className="bg-pink-200 flex flex-col gap-4 p-20 relative">
-            <h1>Are you sure you want to delete this entry?</h1>
-            <div className="flex gap-2">
+          <div className="bg-brand-series flex flex-col gap-4 p-20 relative">
+            <h4 className="text-xl mb-2">
+              Are you sure you want to delete this entry?
+            </h4>
+            <div className="flex justify-center gap-2">
               <button
-                className="border border-brand-black p-6"
+                className="border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground px-4 py-2 rounded-md text-sm font-medium"
                 onClick={() => handleDeleteEntry(Number(entryId))}
               >
                 Delete
               </button>
               <button
-                className="py-2 px-4 absolute top-5 right-5 bg-brand-black text-white"
+                className="absolute top-5 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground px-4 py-2 rounded-md text-sm font-medium right-5 "
                 onClick={() => {
                   setToggleDelete(false);
                 }}
@@ -96,13 +98,13 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
             )}
             <div className="flex gap-2 justify-end">
               <Link href={`/dashboard/${entryId}/edit`}>
-                <button className="hover:bg-sky-300 py-2 rounded-xl px-2">
+                <button className="hover:bg-white py-2 rounded-xl px-2">
                   <EditIcon className="w-6 h-6 inline-block" />
                 </button>
               </Link>
               <div className="flex gap-x-2">
                 <button
-                  className="hover:bg-red-400 py-2 rounded-xl px-2"
+                  className="hover:bg-white py-2 rounded-xl px-2"
                   onClick={() => setToggleDelete(!toggleDelete)}
                 >
                   <TrashIcon className="w-6 h-6 inline-block" />
