@@ -4,6 +4,7 @@ import Link from "next/link";
 import RatingTag from "@/src/app/components/form/RatingTag";
 import { SelectEntry } from "@/src/db/schema";
 import { ArrowOutwardIcon } from "@/src/app/components/Icons";
+import { categoryBg } from "@/src/lib/utils";
 
 function Entry({
   id,
@@ -19,15 +20,6 @@ function Entry({
   developer,
   rating,
 }: SelectEntry) {
-  const categoryBg: Record<string, string> = {
-    Game: "bg-brand-game",
-    Book: "bg-brand-book",
-    Movie: "bg-brand-movie",
-    Music: "bg-brand-music",
-    // fallback/default style
-    default: "bg-brand-gray text-black",
-  };
-
   const backgroundClass = categoryBg[category] || categoryBg.default;
 
   return (

@@ -7,6 +7,8 @@ import RatingTag from "@/src/app/components/form/RatingTag";
 import { useRouter } from "next/navigation";
 import { deleteEntry } from "@/src/app/actions/actions";
 import { useState } from "react";
+import { cn } from "@/src/lib/utils";
+import { categoryBg } from "@/src/lib/utils";
 
 type DetailPageProps = {
   entry: SelectEntry;
@@ -21,8 +23,9 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
     await deleteEntry(id);
     router.push("/dashboard");
   };
-
+  const backgroundClass = categoryBg[entry.category] || categoryBg.default;
   return (
+    /* Delete popup */
     <div className="flex flex-col lg:flex-row max-w-[64rem]">
       {toggleDelete ? (
         <section className="absolute flex items-center justify-center top-0 bottom-0 right-0 left-0">
@@ -48,7 +51,11 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
         </section>
       ) : null}
 
-      <div className="px-10 md:px-20 py-8 md:py-12 flex flex-col bg-brand-game rounded-xl text-brand-black">
+      <div
+        className={cn(
+          `px-10 md:px-20 py-8 md:py-12 flex flex-col ${backgroundClass} rounded-xl text-brand-black`
+        )}
+      >
         <div className="flex justify-between mb-2">
           <Link href="/dashboard" className="hover:opacity-60">
             <ArrowLeftIcon className="w-8 h-8 fill-brand-black" />
@@ -80,7 +87,9 @@ export default function DetailPage({ entry, entryId }: DetailPageProps) {
                   </h2>
                 </div>
                 <RatingTag rating={entry.rating ?? undefined} />
-                <p className="text-md font-semibold">{entry.description}</p>
+                <p className="text-md font-semibold max-w-xl">
+                  {entry.description}
+                </p>
               </div>
             ) : (
               <p>Loading...</p>
