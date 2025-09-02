@@ -25,7 +25,7 @@ function Entry({
   return (
     <Link href={`dashboard/${id}`}>
       <div
-        className={`${backgroundClass} w-[28rem] p-7 md:p-8 flex flex-col gap-3 md:gap-4 md:hover:opacity-80 justify-between rounded-xl text-brand-black`}
+        className={`${backgroundClass} w-[28rem] p-7 md:p-8 flex flex-col gap-2 md:gap-4 md:hover:opacity-80 justify-between rounded-xl text-brand-black`}
       >
         <div className="flex items-center justify-between">
           <h1 className="md:text-5xl text-4xl font-karla font-extrabold tracking-tighter">
@@ -45,7 +45,9 @@ function Entry({
           </div>
           <RatingTag rating={rating || undefined} />
           <div className="flex flex-col gap-3">
-            <p className="line-clamp-3 font-normal">{description}</p>
+            <p className="line-clamp-3 font-normal text-md leading-6 font-geist">
+              {description}
+            </p>
           </div>
         </div>
       </div>

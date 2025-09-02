@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Karla } from "next/font/google";
+import { Geist, Karla, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/src/app/components/ui/Header";
 import Footer from "@/src/app/components/ui/Footer";
@@ -22,6 +22,12 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  weight: "variable",
+});
+
 const karlaSans = Karla({
   variable: "--font-karla",
   subsets: ["latin"],
@@ -36,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${karlaSans.variable} antialiased`}
+        className={`${geistSans.variable} ${karlaSans.variable} ${geistMono.variable} antialiased`}
       >
         <MenuProvider>
           <Header />

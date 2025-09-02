@@ -14,6 +14,6 @@ export const categoryBg: Record<string, string> = {
   Book: "bg-brand-book",
   Movie: "bg-brand-movie",
   Music: "bg-brand-music",
-  // fallback/default style
+  Series: "bg-brand-series",
   default: "bg-brand-gray text-black",
-};
+} as const;
