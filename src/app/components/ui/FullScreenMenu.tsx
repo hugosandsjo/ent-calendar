@@ -10,7 +10,7 @@ function FullScreenMenu() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-white flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-brand-gray flex items-center justify-center">
       <div className="text-2xl">
         {/* Close button */}
         <button

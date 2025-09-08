@@ -14,7 +14,7 @@ export function LogoutButton() {
   };
 
   return (
-    <Button variant={"outline"} onClick={logout}>
+    <Button variant={"ghost"} onClick={logout}>
       Logout
     </Button>
   );

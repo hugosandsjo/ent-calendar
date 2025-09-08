@@ -17,7 +17,7 @@ function Header() {
           <h1 className="text-4xl hover:opacity-30">O</h1>
         </Link>
         <Link href="/dashboard" className="hidden md:flex">
-          <p className="border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground px-4 py-2 rounded-md text-sm font-medium">
+          <p className="hover:bg-accent px-4 py-2 rounded-lg text-[22px] leading-[1.3em] font-medium">
             Dashboard
           </p>
         </Link>
