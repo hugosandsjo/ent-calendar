@@ -11,7 +11,7 @@ export default function DashboardSection({ user }: DashboardSectionProps) {
     <section className="flex flex-col px-4 text-center md:px-10 gap-8 justify-center p-8">
       <div className="flex flex-col gap-8">
         <h1 className="text-3xl md:text-6xl font-karla font-extrabold tracking-tight text-brand-book">
-          Welcome, {user?.email}!
+          Welcome!
         </h1>
         <Link href="/dashboard">
           <button className="bg-brand-black text-white hover:opacity-70 p-4 rounded-lg">
