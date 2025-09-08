@@ -6,7 +6,7 @@ type DashboardSectionProps = {
   user: User | null;
 };
 
-export default function DashboardSection({ user }: DashboardSectionProps) {
+export default function DashboardSection({}: DashboardSectionProps) {
   return (
     <section className="flex flex-col px-4 text-center md:px-10 gap-8 justify-center p-8">
       <div className="flex flex-col gap-8">
