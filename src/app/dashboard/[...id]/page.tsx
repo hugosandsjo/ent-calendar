@@ -54,7 +54,7 @@ export default async function DynamicDashboardPage({ params }: PageProps) {
     if (!entry) return <p>Loading...</p>;
 
     return (
-      <section className="flex justify-center px-4 md:px-20 py-36">
+      <section className="flex justify-center px-4 md:px-20 md:py-36">
         <DetailPage entry={entry} entryId={entryId} />
       </section>
     );

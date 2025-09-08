@@ -14,32 +14,41 @@ function Header() {
     >
       <div className={`flex items-center justify-between w-full`}>
         <Link href="/">
-          <h1 className="text-4xl hover:opacity-30">ENTcalendar</h1>
+          <h1 className="text-4xl hover:opacity-30">O</h1>
         </Link>
         <Link href="/dashboard" className="hidden md:flex">
-          <p className="border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground px-4 py-2 rounded-md text-sm font-medium">
+          <p className="hover:bg-accent px-4 py-2 rounded-lg text-[22px] leading-[1.3em] font-medium">
             Dashboard
           </p>
         </Link>
         <AuthButton />
+        <Link href="/dashboard/create" className="flex md:hidden">
+          <Image
+            className="hover:opacity-30"
+            src="/plus.svg"
+            width={30}
+            height={30}
+            alt="plus icon"
+          />
+        </Link>
         <div>
           <button
-            className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1"
+            className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5"
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
             <span
-              className={`block w-6 h-0.5 bg-black transition-all ${
+              className={`block w-8 h-[3px] bg-black transition-all ${
                 isOpen ? "rotate-45 translate-y-2" : ""
               }`}
             ></span>
             <span
-              className={`block w-6 h-0.5 bg-black transition-all ${
+              className={`block w-8 h-[3px] bg-black transition-all ${
                 isOpen ? "opacity-0" : ""
               }`}
             ></span>
             <span
-              className={`block w-6 h-0.5 bg-black transition-all ${
+              className={`block w-8 h-[3px] bg-black transition-all ${
                 isOpen ? "-rotate-45 -translate-y-2" : ""
               }`}
             ></span>

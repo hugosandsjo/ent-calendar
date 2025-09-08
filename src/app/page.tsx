@@ -14,8 +14,8 @@ export default async function Home() {
   if (!user) {
     return (
       <main className="flex flex-col items-center min-h-screen pt-20">
-        <div className="w-full flex text-center font-karla px-4 mb-10">
-          <h1 className="text-5xl font-extrabold leading-[58px] text-brand-black tracking-tight">
+        <div className="w-full text-center font-karla px-4 mb-10">
+          <h1 className="md:text-8xl font-extrabold leading-[1.2em] text-brand-black tracking-tight text-5xl">
             Keep track of your recently watched films, played games or read
             books.
           </h1>
