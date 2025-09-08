@@ -14,7 +14,7 @@ function Header() {
     >
       <div className={`flex items-center justify-between w-full`}>
         <Link href="/">
-          <h1 className="text-4xl hover:opacity-30">O</h1>
+          <h1 className="text-4xl hover:opacity-30">Ent</h1>
         </Link>
         <Link href="/dashboard" className="hidden md:flex">
           <p className="hover:bg-accent px-4 py-2 rounded-lg text-[22px] leading-[1.3em] font-medium">

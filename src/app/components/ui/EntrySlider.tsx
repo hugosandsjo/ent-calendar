@@ -36,7 +36,7 @@ function EntrySlider({ month, entries }: EntrySliderProps) {
   return (
     <section className="relative">
       <div className="flex px-4 gap-2 justify-between md:px-10 items-center mb-4">
-        <h1 className="text-4xl">{capitalizeFirstLetter(month)}</h1>
+        <h1 className="text-3xl">{capitalizeFirstLetter(month)}</h1>
         <div className="flex gap-2 items-center">
           <button
             className="flex justify-center items-center hover:opacity-60 border-2 border-black rounded-full px-2 py-2"
