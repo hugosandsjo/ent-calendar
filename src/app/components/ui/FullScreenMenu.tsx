@@ -31,7 +31,6 @@ function FullScreenMenu() {
             >
               Home
             </Link>
-
             <Link
               href="/dashboard"
               onClick={toggleMenu}
@@ -46,7 +45,6 @@ function FullScreenMenu() {
             >
               About
             </Link>
-
             <Link
               href="/contact"
               onClick={toggleMenu}
