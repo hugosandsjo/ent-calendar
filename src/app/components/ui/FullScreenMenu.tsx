@@ -39,15 +39,6 @@ function FullScreenMenu() {
             >
               Dashboard
             </Link>
-
-            <Link
-              href="/dashboard/create"
-              onClick={toggleMenu}
-              className="md:text-5xl text-4xl font-karla font-extrabold tracking-tighter"
-            >
-              Create Entry
-            </Link>
-
             <Link
               href="/about"
               onClick={toggleMenu}
